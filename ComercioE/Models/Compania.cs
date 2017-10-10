@@ -38,6 +38,9 @@ namespace ComercioE.Models
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Provincia")]
         public int CiudadId { get; set; }
+
+        [NotMapped]
+        public HttpPostedFileBase LogoFile { get; set; }
         //relaciones
         //una compañia pertenece a una ciudad
         public virtual Ciudad Ciudad { get; set; }

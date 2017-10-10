@@ -20,6 +20,16 @@ namespace ComercioE.Clases
             return provincias.OrderBy(p => p.Nombre).ToList();
         }
 
+        public static List<Ciudad> GetCiudades()
+        {
+            var ciudades = db.Ciudads.ToList();
+            ciudades.Add(new Ciudad
+            {
+                CiudadId = 0,
+                Nombre = "[Seleccione una Ciudad]",
+            });
+            return ciudades.OrderBy(p => p.Nombre).ToList();
+        }
         public void Dispose()
         {
             db.Dispose();
