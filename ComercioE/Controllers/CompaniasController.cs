@@ -50,13 +50,49 @@ namespace ComercioE.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CompaniaId,Nombre,Telefono,Direccion,Logo,ProvinciaId,CiudadId")] Compania compania)
+        public ActionResult Create([Bind(Include = "CompaniaId,Nombre,Telefono,Direccion,Logo,ProvinciaId,CiudadId,LogoFile")] Compania compania)
         {
             if (ModelState.IsValid)
             {
+               
                 db.Companias.Add(compania);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+
+                    if (compania.LogoFile != null)
+                    {
+                        var folder = "~/Content/Logos";
+                        var file = string.Format("{0}.jpg", compania.CompaniaId);
+                        var respuesta = FilesHelper.UploadPhoto(compania.LogoFile, folder, file);
+                        if (respuesta)
+                        {
+                            var pic = string.Format("{0}/{1}", folder, file);
+                            compania.Logo = pic;
+
+                            db.Entry(compania).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                        
+                    }
+
+                    
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+
+                    if (ex.InnerException != null &&
+                       ex.InnerException.InnerException != null &&
+                       ex.InnerException.InnerException.Message.Contains("_Index"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Error de Ingreso");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                }
             }
 
             ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", compania.CiudadId);
@@ -71,7 +107,7 @@ namespace ComercioE.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Compania compania = db.Companias.Find(id);
+            var compania = db.Companias.Find(id);
             if (compania == null)
             {
                 return HttpNotFound();
@@ -86,13 +122,44 @@ namespace ComercioE.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CompaniaId,Nombre,Telefono,Direccion,Logo,ProvinciaId,CiudadId")] Compania compania)
+        public ActionResult Edit([Bind(Include = "CompaniaId,Nombre,Telefono,Direccion,Logo,ProvinciaId,CiudadId,LogoFile")] Compania compania)
         {
             if (ModelState.IsValid)
             {
+                if (compania.LogoFile != null)
+                {
+                    var pic = string.Empty;
+                    var folder = "~/Content/Logos";
+                    var file = string.Format("{0}.jpg", compania.CompaniaId);
+                    var respuesta = FilesHelper.UploadPhoto(compania.LogoFile, folder, file);
+                    if (respuesta)
+                    {
+                         pic = string.Format("{0}/{1}", folder, file);
+                        compania.Logo = pic;
+
+                    }
+                }
+                
                 db.Entry(compania).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+
+                    if (ex.InnerException != null &&
+                       ex.InnerException.InnerException != null &&
+                       ex.InnerException.InnerException.Message.Contains("_Index"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Error en la Edición");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                }
             }
             ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", compania.CiudadId);
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", compania.ProvinciaId);

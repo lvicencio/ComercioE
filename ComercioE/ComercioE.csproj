@@ -206,6 +206,7 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Clases\CombosHelper.cs" />
+    <Compile Include="Clases\FilesHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\CiudadsController.cs" />
     <Compile Include="Controllers\CompaniasController.cs" />

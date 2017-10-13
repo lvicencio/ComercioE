@@ -7,7 +7,7 @@
 <h2>Edit</h2>
 
 
-@using (Html.BeginForm())
+@using (Html.BeginForm("Edit", "Companias", FormMethod.Post, new { enctype = "multipart/form-data" }))
 {
     @Html.AntiForgeryToken()
     
@@ -16,6 +16,7 @@
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
         @Html.HiddenFor(model => model.CompaniaId)
+        @Html.HiddenFor(model => model.Logo)
 
         <div class="form-group">
             @Html.LabelFor(model => model.Nombre, htmlAttributes: new { @class = "control-label col-md-2" })
@@ -42,10 +43,11 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.Logo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.LogoFile, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Logo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Logo, "", new { @class = "text-danger" })
+                <span class="btn btn-default btn-file">
+                    @Html.TextBoxFor(modelo => modelo.LogoFile, new { type = "file" })
+                </span>
             </div>
         </div>
 
@@ -67,16 +69,43 @@
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Save" class="btn btn-default" />
+                <input type="submit" value="Save" class="btn btn-primary" />
+                @Html.ActionLink("Volver Atras", "Index", new { }, new { @class = "btn btn-success" })
             </div>
         </div>
     </div>
 }
 
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>
+
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#ProvinciaId").change(function () {
+                $("#CiudadId").empty();
+                $("#CiudadId").append('<option value="0">[Seleccione Ciudad]</option>');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCiudades")',
+                    dataType: 'json',
+                    data: { provinciatId: $("#ProvinciaId").val() },
+                    success: function (data) {
+                        $.each(data, function (i, data) {
+                            $("#CiudadId").append('<option value="'
+                             + data.CiudadId + '">'
+                             + data.Nombre + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('No se pudo cargar las ciudades.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+    </script>
+
 }
