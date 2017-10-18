@@ -21,5 +21,6 @@ namespace ComercioE.Models
         //una provincia tiene muchas ciudades
         public virtual ICollection<Ciudad> Ciudades { get; set; }
         public virtual ICollection<Compania> Companias { get; set; }
+        public virtual ICollection<User> Usuarios { get; set; }
     }
 }

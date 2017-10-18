@@ -45,5 +45,6 @@ namespace ComercioE.Models
         //una compañia pertenece a una ciudad
         public virtual Ciudad Ciudad { get; set; }
         public virtual Provincia Provincia { get; set; }
+        public virtual ICollection<User> Usuarios { get; set; }
     }
 }

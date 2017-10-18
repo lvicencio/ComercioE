@@ -30,6 +30,16 @@ namespace ComercioE.Clases
             });
             return ciudades.OrderBy(p => p.Nombre).ToList();
         }
+        public static List<Compania> GetCompanias()
+        {
+            var companias = db.Companias.ToList();
+            companias.Add(new Compania
+            {
+                CompaniaId = 0,
+                Nombre = "[Seleccione Compañia]",
+            });
+            return companias.OrderBy(p => p.Nombre).ToList();
+        }
         public void Dispose()
         {
             db.Dispose();

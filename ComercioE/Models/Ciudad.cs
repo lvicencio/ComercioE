@@ -11,19 +11,22 @@ namespace ComercioE.Models
     {
         [Key]
         public int CiudadId { get; set; }
-        [Index("Ciudad_Nombre_Index", IsUnique = true)]
         [Display(Name = "Ciudad")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener maximo {1} caracteres")]
+        [Index("Ciudad_Nombre_Index", 2, IsUnique = true)]
         public string Nombre { get; set; }
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Provincia")]
-        //[Index("Ciudad_ProvinciaId_Index", 1,IsUnique = true)]
+      [Index("Ciudad_Nombre_Index", 1,IsUnique = true)]
         public int ProvinciaId { get; set; }
 
         //relaciones
-        //una ciudad tiene una provincia, tiene varias compañias
+        //una ciudad tiene una provincia, tiene varias compañias, tiene muchos usuarios
         public virtual Provincia Provincia { get; set; }
         public virtual ICollection<Compania> Companias { get; set; }
+        public virtual ICollection<User> Usuarios { get; set; }
+
+
     }
 }

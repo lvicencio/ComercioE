@@ -25,5 +25,7 @@ namespace ComercioE.Models
         public System.Data.Entity.DbSet<ComercioE.Models.Ciudad> Ciudads { get; set; }
 
         public System.Data.Entity.DbSet<ComercioE.Models.Compania> Companias { get; set; }
+
+        public System.Data.Entity.DbSet<ComercioE.Models.User> Users { get; set; }
     }
 }
