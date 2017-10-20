@@ -1,4 +1,5 @@
-﻿using ComercioE.Migrations;
+﻿using ComercioE.Clases;
+using ComercioE.Migrations;
 using ComercioE.Models;
 using System;
 using System.Collections.Generic;
@@ -17,11 +18,19 @@ namespace ComercioE
         protected void Application_Start()
         {
             Database.SetInitializer(new MigrateDatabaseToLatestVersion<ComercioEContext,Configuration>());
+            CheackRolesySuperUsuario();
             AreaRegistration.RegisterAllAreas();
             GlobalConfiguration.Configure(WebApiConfig.Register);
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+        }
+
+        private void CheackRolesySuperUsuario()
+        {
+            UsersHelper.CheckRole("Admin");
+            UsersHelper.CheckRole("User");
+            UsersHelper.CheckSuperUser();
         }
     }
 }

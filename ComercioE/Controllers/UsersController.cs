@@ -59,6 +59,10 @@ namespace ComercioE.Controllers
                 try
                 {
                     db.SaveChanges();
+                    //se graba en la tabla user, y lo graba tambien se
+                    //crea el usuario en la db de userAsp, la contraseña con que se 
+                    //crea será el mismo correo
+                    UsersHelper.CreateUserASP(user.UserName, "User");
 
                     if (user.FotoFile != null)
                     {
