@@ -126,10 +126,35 @@ namespace ComercioE.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "UserId,UserName,Nombre,Apellido,Telefono,Direccion,Foto,ProvinciaId,CiudadId,CompaniaId")] User user)
+        public ActionResult Edit([Bind(Include = "UserId,UserName,Nombre,Apellido,Telefono,Direccion,Foto,ProvinciaId,CiudadId,CompaniaId, FotoFile")] User user)
         {
             if (ModelState.IsValid)
             {
+                if (user.FotoFile != null)
+                {
+                    var pic = string.Empty;
+                    var folder = "~/Content/Users";
+                    var file = string.Format("{0}.jpg", user.UserId);
+                    var respuesta = FilesHelper.UploadPhoto(user.FotoFile, folder, file);
+                    if (respuesta)
+                    {
+                        pic = string.Format("{0}/{1}", folder, file);
+                        user.Foto = pic;
+
+                    }
+                }
+
+                //por si cambia el correo, reflejarlo en el membership de ASP
+
+                var db2 = new ComercioEContext();
+                var actualUserName = db2.Users.Find(user.UserId);
+                if (actualUserName.UserName != user.UserName)
+                {
+                    UsersHelper.UpdateUserName(actualUserName.UserName, user.UserName);
+                }
+                db2.Dispose();
+                //fin cambio de correo
+
                 db.Entry(user).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -162,7 +187,16 @@ namespace ComercioE.Controllers
         {
             User user = db.Users.Find(id);
             db.Users.Remove(user);
-            db.SaveChanges();
+            try
+            {
+                db.SaveChanges();
+                UsersHelper.DeleteUser(user.UserName);
+            }
+            catch (Exception)
+            {
+
+                ModelState.AddModelError(string.Empty, "Error al borrar el Usuario");
+            }
             return RedirectToAction("Index");
         }
 

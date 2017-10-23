@@ -27,6 +27,37 @@ namespace ComercioE.Clases
             }
         }
 
+        public static bool DeleteUser(string userName)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
+            var userASP = userManager.FindByEmail(userName);
+            if (userASP == null)
+            {
+                return false;
+            }
+
+           var respuesta = userManager.Delete(userASP);
+
+            return respuesta.Succeeded;
+
+        }
+
+        // actualiza el correo electronico
+        public static bool UpdateUserName(string actualUserName, string nuevoUsername)
+        {
+            var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
+            var userASP = userManager.FindByEmail(actualUserName);
+            if (userASP == null)
+            {
+                return false;
+            }
+
+            userASP.UserName = nuevoUsername;
+            userASP.Email = nuevoUsername;
+            var respuesta = userManager.Update(userASP);
+            return respuesta.Succeeded;
+
+        }
         public static void CheckSuperUser()
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
