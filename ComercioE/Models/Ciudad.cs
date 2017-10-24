@@ -16,6 +16,7 @@ namespace ComercioE.Models
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener maximo {1} caracteres")]
         [Index("Ciudad_Nombre_Index", 2, IsUnique = true)]
         public string Nombre { get; set; }
+        [Display(Name = "Provincia")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Provincia")]
       [Index("Ciudad_Nombre_Index", 1,IsUnique = true)]

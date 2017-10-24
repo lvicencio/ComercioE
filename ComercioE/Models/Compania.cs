@@ -43,8 +43,10 @@ namespace ComercioE.Models
         public HttpPostedFileBase LogoFile { get; set; }
         //relaciones
         //una compañia pertenece a una ciudad
+        //compañia tiene muchos usuarios, compañias
         public virtual Ciudad Ciudad { get; set; }
         public virtual Provincia Provincia { get; set; }
         public virtual ICollection<User> Usuarios { get; set; }
+        public virtual ICollection<Compania> Companias { get; set; }
     }
 }
