@@ -25,11 +25,30 @@
                     <li>@Html.ActionLink("Inicio", "Index", "Home")</li>
                     <li>@Html.ActionLink("Acerca de", "About", "Home")</li>
                     <li>@Html.ActionLink("Contacto", "Contact", "Home")</li>
-                    <li>@Html.ActionLink("Provincias", "Index", "Provincias")</li>
-                    <li>@Html.ActionLink("Ciudades", "Index", "Ciudads")</li>
-                    <li>@Html.ActionLink("Compañias", "Index", "Companias")</li>
-                    <li>@Html.ActionLink("Usuarios", "Index", "Users")</li>
-                    <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
+                    
+                    @if (User.IsInRole("Admin"))
+                    {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Administración<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Ciudades", "Index", "Ciudads")</li>
+                            <li>@Html.ActionLink("Compañias", "Index", "Companias")</li>
+                            <li>@Html.ActionLink("Provincias", "Index", "Provincias")</li>
+                            <li>@Html.ActionLink("Usuarios", "Index", "Users")</li>
+                        </ul>
+                    </li>
+                    }
+                    @if (User.IsInRole("User"))
+                    {
+
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">Otros<b class="caret"></b></a>
+                        <ul class="dropdown-menu">
+                            <li>@Html.ActionLink("Categorias", "Index", "Categorias")</li>
+                        </ul>
+                    </li>
+                    }
+
                 </ul>
                 @Html.Partial("_LoginPartial")
             </div>

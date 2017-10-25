@@ -10,6 +10,7 @@ using ComercioE.Models;
 
 namespace ComercioE.Controllers
 {
+    [Authorize(Roles ="User")]
     public class CategoriasController : Controller
     {
         private ComercioEContext db = new ComercioEContext();
@@ -17,7 +18,13 @@ namespace ComercioE.Controllers
         // GET: Categorias
         public ActionResult Index()
         {
-            var categorias = db.Categorias.Include(c => c.Compania);
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            var categorias = db.Categorias.Where(c => c.CompaniaId == user.CompaniaId);
+            //var categorias = db.Categorias.Include(c => c.Compania);
             return View(categorias.ToList());
         }
 
@@ -39,8 +46,21 @@ namespace ComercioE.Controllers
         // GET: Categorias/Create
         public ActionResult Create()
         {
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
-            return View();
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
+            //return View();
+
+            //para seleccionar y mandar el companiaId a la vista
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            if (user == null)
+            {
+                return RedirectToAction("Index", "Home");
+            }
+            //manda la categoria a la vista
+            var categoria = new Categoria
+                            {
+                            CompaniaId = user.CompaniaId,
+                            };
+            return View(categoria);
         }
 
         // POST: Categorias/Create

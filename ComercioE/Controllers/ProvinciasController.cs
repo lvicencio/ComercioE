@@ -10,6 +10,7 @@ using ComercioE.Models;
 
 namespace ComercioE.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class ProvinciasController : Controller
     {
         private ComercioEContext db = new ComercioEContext();

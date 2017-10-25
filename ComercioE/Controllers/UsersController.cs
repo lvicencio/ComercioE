@@ -11,6 +11,7 @@ using ComercioE.Clases;
 
 namespace ComercioE.Controllers
 {
+    [Authorize(Roles = "Admin")]
     public class UsersController : Controller
     {
         private ComercioEContext db = new ComercioEContext();
