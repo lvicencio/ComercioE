@@ -11,131 +11,132 @@ using ComercioE.Models;
 namespace ComercioE.Controllers
 {
     [Authorize(Roles ="User")]
-    public class CategoriasController : Controller
+    public class ImpuestosController : Controller
     {
         private ComercioEContext db = new ComercioEContext();
 
-        // GET: Categorias
+        // GET: Impuestos
         public ActionResult Index()
         {
+            // valida si el usuario existe, si no existe se redirecciona al indice
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             if (user == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            var categorias = db.Categorias.Where(c => c.CompaniaId == user.CompaniaId);
-            //var categorias = db.Categorias.Include(c => c.Compania);
-            return View(categorias.ToList());
+
+            // var impuestoes = db.Impuestoes.Include(i => i.Compania);
+
+            //muestras los impuestos del usuario de su compañia
+            var impuestoes = db.Impuestoes.Where( i => i.CompaniaId == user.CompaniaId);
+            return View(impuestoes.ToList());
         }
 
-        // GET: Categorias/Details/5
+        // GET: Impuestos/Details/5
         public ActionResult Details(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Impuesto impuesto = db.Impuestoes.Find(id);
+            if (impuesto == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            return View(impuesto);
         }
 
-        // GET: Categorias/Create
+        // GET: Impuestos/Create
         public ActionResult Create()
         {
-            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
-            //return View();
-
-            //para seleccionar y mandar el companiaId a la vista
+            // valida si el usuario existe, si no existe se redirecciona al indice
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             if (user == null)
             {
                 return RedirectToAction("Index", "Home");
             }
-            //manda la categoria a la vista
-            var categoria = new Categoria
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
+            var impuesto = new Impuesto
                             {
-                            CompaniaId = user.CompaniaId,
+                                CompaniaId = user.CompaniaId,
                             };
-            return View(categoria);
+            return View(impuesto);
         }
 
-        // POST: Categorias/Create
+        // POST: Impuestos/Create
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CategoriaId,Descripcion,CompaniaId")] Categoria categoria)
+        public ActionResult Create([Bind(Include = "ImpuestoId,Descripcion,Valor,CompaniaId")] Impuesto impuesto)
         {
             if (ModelState.IsValid)
             {
-                db.Categorias.Add(categoria);
+                db.Impuestoes.Add(impuesto);
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
 
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", categoria.CompaniaId);
-            return View(categoria);
+           // ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", impuesto.CompaniaId);
+            return View(impuesto);
         }
 
-        // GET: Categorias/Edit/5
+        // GET: Impuestos/Edit/5
         public ActionResult Edit(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Impuesto impuesto = db.Impuestoes.Find(id);
+            if (impuesto == null)
             {
                 return HttpNotFound();
             }
-            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", categoria.CompaniaId);
-            return View(categoria);
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", impuesto.CompaniaId);
+            return View(impuesto);
         }
 
-        // POST: Categorias/Edit/5
+        // POST: Impuestos/Edit/5
         // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "CategoriaId,Descripcion,CompaniaId")] Categoria categoria)
+        public ActionResult Edit([Bind(Include = "ImpuestoId,Descripcion,Valor,CompaniaId")] Impuesto impuesto)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(categoria).State = EntityState.Modified;
+                db.Entry(impuesto).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", categoria.CompaniaId);
-            return View(categoria);
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", impuesto.CompaniaId);
+            return View(impuesto);
         }
 
-        // GET: Categorias/Delete/5
+        // GET: Impuestos/Delete/5
         public ActionResult Delete(int? id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Categoria categoria = db.Categorias.Find(id);
-            if (categoria == null)
+            Impuesto impuesto = db.Impuestoes.Find(id);
+            if (impuesto == null)
             {
                 return HttpNotFound();
             }
-            return View(categoria);
+            return View(impuesto);
         }
 
-        // POST: Categorias/Delete/5
+        // POST: Impuestos/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Categoria categoria = db.Categorias.Find(id);
-            db.Categorias.Remove(categoria);
+            Impuesto impuesto = db.Impuestoes.Find(id);
+            db.Impuestoes.Remove(impuesto);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

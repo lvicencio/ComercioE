@@ -29,5 +29,7 @@ namespace ComercioE.Models
         public System.Data.Entity.DbSet<ComercioE.Models.User> Users { get; set; }
 
         public System.Data.Entity.DbSet<ComercioE.Models.Categoria> Categorias { get; set; }
+
+        public System.Data.Entity.DbSet<ComercioE.Models.Impuesto> Impuestoes { get; set; }
     }
 }

@@ -214,6 +214,7 @@
     <Compile Include="Controllers\CiudadsController.cs" />
     <Compile Include="Controllers\CompaniasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ImpuestosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\ProvinciasController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -227,6 +228,7 @@
     <Compile Include="Models\ComercioEContext.cs" />
     <Compile Include="Models\Compania.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\Impuesto.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Provincia.cs" />
     <Compile Include="Models\User.cs" />
@@ -318,6 +320,11 @@
     <Content Include="Views\Categorias\Details.cshtml" />
     <Content Include="Views\Categorias\Edit.cshtml" />
     <Content Include="Views\Categorias\Index.cshtml" />
+    <Content Include="Views\Impuestos\Create.cshtml" />
+    <Content Include="Views\Impuestos\Delete.cshtml" />
+    <Content Include="Views\Impuestos\Details.cshtml" />
+    <Content Include="Views\Impuestos\Edit.cshtml" />
+    <Content Include="Views\Impuestos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
