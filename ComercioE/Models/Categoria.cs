@@ -23,5 +23,7 @@ namespace ComercioE.Models
         public int CompaniaId { get; set; }
 
         public virtual Compania Compania { get; set; }
+
+        public virtual ICollection<Producto> Productos { get; set; }
     }
 }

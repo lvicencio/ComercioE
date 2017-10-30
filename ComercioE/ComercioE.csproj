@@ -216,6 +216,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpuestosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ProvinciasController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -230,6 +231,7 @@
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Impuesto.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Provincia.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -325,6 +327,11 @@
     <Content Include="Views\Impuestos\Details.cshtml" />
     <Content Include="Views\Impuestos\Edit.cshtml" />
     <Content Include="Views\Impuestos\Index.cshtml" />
+    <Content Include="Views\Productos\Create.cshtml" />
+    <Content Include="Views\Productos\Delete.cshtml" />
+    <Content Include="Views\Productos\Details.cshtml" />
+    <Content Include="Views\Productos\Edit.cshtml" />
+    <Content Include="Views\Productos\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

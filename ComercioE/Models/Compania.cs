@@ -48,7 +48,7 @@ namespace ComercioE.Models
         public virtual Provincia Provincia { get; set; }
         public virtual ICollection<User> Usuarios { get; set; }
         public virtual ICollection<Compania> Companias { get; set; }
-
         public virtual ICollection<Impuesto> Impuestos{ get; set; }
+        public virtual ICollection<Producto> Productos { get; set; }
     }
 }
