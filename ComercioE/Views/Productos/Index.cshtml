@@ -7,16 +7,16 @@
 <h2>Productos</h2>
 
 <p>
-    @Html.ActionLink("Create New", "Create", new { }, new { @class = "btn btn-primary" })
+    @Html.ActionLink("Crear Nuevo", "Create", new { }, new { @class = "btn btn-primary" })
 </p>
 <table class="table">
     <tr>
         <th>
             @Html.DisplayNameFor(model => model.Categoria.Descripcion)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.Compania.Nombre)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.Impuesto.Descripcion)
         </th>
@@ -43,9 +43,9 @@
         <td>
             @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
         </td>
-        <td>
+        @*<td>
             @Html.DisplayFor(modelItem => item.Compania.Nombre)
-        </td>
+        </td>*@
         <td>
             @Html.DisplayFor(modelItem => item.Impuesto.Descripcion)
         </td>
@@ -59,7 +59,11 @@
             @Html.DisplayFor(modelItem => item.Precio)
         </td>
         <td>
-            @Html.DisplayFor(modelItem => item.Imagen)
+            @if (!string.IsNullOrEmpty(item.Imagen))
+            {
+                <img src="@Url.Content(item.Imagen)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+            }
+
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.Comentarios)

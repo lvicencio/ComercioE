@@ -7,6 +7,7 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ComercioE.Models;
+using ComercioE.Clases;
 
 namespace ComercioE.Controllers
 {
@@ -18,7 +19,10 @@ namespace ComercioE.Controllers
         // GET: Productos
         public ActionResult Index()
         {
-            var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Compania).Include(p => p.Impuesto);
+            var user = db.Users.Where( u =>u.UserName == User.Identity.Name).FirstOrDefault();
+            //var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Compania).Include(p => p.Impuesto);
+            var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Impuesto)
+                .Where(p => p.CompaniaId == user.CompaniaId);
             return View(productoes.ToList());
         }
 
@@ -40,10 +44,12 @@ namespace ComercioE.Controllers
         // GET: Productos/Create
         public ActionResult Create()
         {
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Descripcion");
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
-            ViewBag.ImpuestoId = new SelectList(db.Impuestoes, "ImpuestoId", "Descripcion");
-            return View();
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewBag.CategoriaId = new SelectList(CombosHelper.GetCategorias(user.CompaniaId), "CategoriaId", "Descripcion");
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
+            ViewBag.ImpuestoId = new SelectList(CombosHelper.GetImpuestos(user.CompaniaId), "ImpuestoId", "Descripcion");
+            var producto = new Producto { CompaniaId = user.CompaniaId, };
+            return View(producto);
         }
 
         // POST: Productos/Create
@@ -51,18 +57,54 @@ namespace ComercioE.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "ProductoId,CompaniaId,Descripcion,BarCode,CategoriaId,ImpuestoId,Precio,Imagen,Comentarios")] Producto producto)
+        public ActionResult Create([Bind(Include = "ProductoId,CompaniaId,Descripcion,BarCode,CategoriaId,ImpuestoId,Precio,Imagen,Comentarios,ImagenFile")] Producto producto)
         {
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             if (ModelState.IsValid)
             {
                 db.Productoes.Add(producto);
-                db.SaveChanges();
-                return RedirectToAction("Index");
-            }
+                try
+                {
+                    db.SaveChanges();
 
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Descripcion", producto.CategoriaId);
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", producto.CompaniaId);
-            ViewBag.ImpuestoId = new SelectList(db.Impuestoes, "ImpuestoId", "Descripcion", producto.ImpuestoId);
+                    if (producto.ImagenFile != null)
+                    {
+                        var folder = "~/Content/Productos";
+                        var file = string.Format("{0}.jpg", producto.ProductoId);
+                        var respuesta = FilesHelper.UploadPhoto(producto.ImagenFile, folder, file);
+                        if (respuesta)
+                        {
+                            var pic = string.Format("{0}/{1}", folder, file);
+                            producto.Imagen = pic;
+
+                            db.Entry(producto).State = EntityState.Modified;
+                            db.SaveChanges();
+                        }
+                    }
+
+
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+
+
+                    if (ex.InnerException != null &&
+                       ex.InnerException.InnerException != null &&
+                       ex.InnerException.InnerException.Message.Contains("_Index"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Error de Ingreso");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                }
+            }
+            
+            ViewBag.CategoriaId = new SelectList(CombosHelper.GetCategorias(user.CompaniaId), "CategoriaId", "Descripcion", producto.CategoriaId);
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", producto.CompaniaId);
+            ViewBag.ImpuestoId = new SelectList(CombosHelper.GetImpuestos(user.CompaniaId), "ImpuestoId", "Descripcion", producto.ImpuestoId);
             return View(producto);
         }
 
@@ -78,9 +120,9 @@ namespace ComercioE.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Descripcion", producto.CategoriaId);
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", producto.CompaniaId);
-            ViewBag.ImpuestoId = new SelectList(db.Impuestoes, "ImpuestoId", "Descripcion", producto.ImpuestoId);
+            ViewBag.CategoriaId = new SelectList(CombosHelper.GetCategorias(producto.CompaniaId), "CategoriaId", "Descripcion", producto.CategoriaId);
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", producto.CompaniaId);
+            ViewBag.ImpuestoId = new SelectList(CombosHelper.GetImpuestos(producto.CompaniaId), "ImpuestoId", "Descripcion", producto.ImpuestoId);
             return View(producto);
         }
 
@@ -89,17 +131,50 @@ namespace ComercioE.Controllers
         // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "ProductoId,CompaniaId,Descripcion,BarCode,CategoriaId,ImpuestoId,Precio,Imagen,Comentarios")] Producto producto)
+        public ActionResult Edit([Bind(Include = "ProductoId,CompaniaId,Descripcion,BarCode,CategoriaId,ImpuestoId,Precio,Imagen,Comentarios,ImagenFile")] Producto producto)
         {
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             if (ModelState.IsValid)
             {
+
+                if (producto.ImagenFile != null)
+                {
+                    var folder = "~/Content/Productos";
+                    var file = string.Format("{0}.jpg", producto.ProductoId);
+                    var respuesta = FilesHelper.UploadPhoto(producto.ImagenFile, folder, file);
+                    if (respuesta)
+                    {
+                        var pic = string.Format("{0}/{1}", folder, file);
+                        producto.Imagen = pic;
+
+                    }
+                }
+
+
                 db.Entry(producto).State = EntityState.Modified;
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+
+                    if (ex.InnerException != null &&
+                       ex.InnerException.InnerException != null &&
+                       ex.InnerException.InnerException.Message.Contains("_Index"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Error en la Edición");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                }
             }
-            ViewBag.CategoriaId = new SelectList(db.Categorias, "CategoriaId", "Descripcion", producto.CategoriaId);
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", producto.CompaniaId);
-            ViewBag.ImpuestoId = new SelectList(db.Impuestoes, "ImpuestoId", "Descripcion", producto.ImpuestoId);
+            ViewBag.CategoriaId = new SelectList(CombosHelper.GetCategorias(producto.CompaniaId), "CategoriaId", "Descripcion", producto.CategoriaId);
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", producto.CompaniaId);
+            ViewBag.ImpuestoId = new SelectList(CombosHelper.GetImpuestos(producto.CompaniaId), "ImpuestoId", "Descripcion", producto.ImpuestoId);
             return View(producto);
         }
 

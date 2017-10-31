@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using System.Collections;
 
 namespace ComercioE.Clases
 {
@@ -43,6 +44,28 @@ namespace ComercioE.Clases
         public void Dispose()
         {
             db.Dispose();
+        }
+
+        public static List<Categoria> GetCategorias(int companiaId)
+        {
+            var categorias = db.Categorias.Where( c => c.CompaniaId == companiaId).ToList();
+            categorias.Add(new Categoria
+            {
+                CategoriaId = 0,
+                Descripcion = "[Seleccione categoria]",
+            });
+            return categorias.OrderBy(p => p.Descripcion).ToList();
+        }
+
+        public static List<Impuesto> GetImpuestos(int companiaId)
+        {
+            var impuestos = db.Impuestoes.Where(c => c.CompaniaId == companiaId).ToList();
+            impuestos.Add(new Impuesto
+            {
+                ImpuestoId = 0,
+                Descripcion = "[Seleccione un Impuesto]",
+            });
+            return impuestos.OrderBy(p => p.Descripcion).ToList();
         }
     }
 }

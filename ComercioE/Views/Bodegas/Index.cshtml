@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ComercioE.Models.Bodega>
+
+@{
+    ViewBag.Title = "Bodegas";
+}
+
+<h2>Bodegas</h2>
+
+<p>
+    @Html.ActionLink("Crear Nueva", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Ciudad.Nombre)
+        </th>
+        @*<th>
+            @Html.DisplayNameFor(model => model.Compañia.Nombre)
+        </th>*@
+        <th>
+            @Html.DisplayNameFor(model => model.Provincia.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Telefono)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Direccion)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.Ciudad.Nombre)
+        </td>
+        @*<td>
+            @Html.DisplayFor(modelItem => item.Compañia.Nombre)
+        </td>*@
+        <td>
+            @Html.DisplayFor(modelItem => item.Provincia.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Nombre)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Telefono)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Direccion)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.BodegaId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.BodegaId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.BodegaId })
+        </td>
+    </tr>
+}
+
+</table>

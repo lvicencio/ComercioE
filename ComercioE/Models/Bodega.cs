@@ -7,14 +7,21 @@ using System.Web;
 
 namespace ComercioE.Models
 {
-    public class Compania
+    public class Bodega
     {
         [Key]
-        public int CompaniaId { get; set; }
-        [Index("Compania_Nombre_Index", IsUnique = true)]
+        public int BodegaId { get; set; }
+
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una {0}")]
+        [Index("Bodega_CompaniaId_Nombre_Index", 1, IsUnique = true)]
         [Display(Name = "Compañia")]
+        public int CompaniaId { get; set; }
+
+        [Display(Name = "Bodega")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(50, ErrorMessage = "El campo {0} debe tener maximo {1} caracteres")]
+        [Index("Bodega_CompaniaId_Nombre_Index", 2,IsUnique = true)]
         public string Nombre { get; set; }
 
         [Display(Name = "Telefono")]
@@ -28,28 +35,20 @@ namespace ComercioE.Models
         [MaxLength(100, ErrorMessage = "El campo {0} debe tener maximo {1} caracteres")]
         public string Direccion { get; set; }
 
-        [DataType(DataType.ImageUrl)]
-        public string Logo { get; set; }
-
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Provincia")]
+        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una {0}")]
+        [Display(Name = "Provincia")]
         public int ProvinciaId { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Provincia")]
+        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una {0}")]
+        [Display(Name = "Ciudad")]
         public int CiudadId { get; set; }
 
-        [NotMapped]
-        public HttpPostedFileBase LogoFile { get; set; }
-        //relaciones
+         //relaciones
         //una compañia pertenece a una ciudad
-        //compañia tiene muchos usuarios, compañias
         public virtual Ciudad Ciudad { get; set; }
         public virtual Provincia Provincia { get; set; }
-        public virtual ICollection<User> Usuarios { get; set; }
-        public virtual ICollection<Compania> Companias { get; set; }
-        public virtual ICollection<Impuesto> Impuestos{ get; set; }
-        public virtual ICollection<Producto> Productos { get; set; }
-        public virtual ICollection<Bodega> Bodegas { get; set; }
+        public virtual Compania Compañia { get; set; }
     }
 }
