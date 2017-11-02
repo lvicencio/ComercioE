@@ -50,5 +50,7 @@ namespace ComercioE.Models
         public virtual Ciudad Ciudad { get; set; }
         public virtual Provincia Provincia { get; set; }
         public virtual Compania Compañia { get; set; }
+
+        public virtual ICollection<Inventario> Inventarios { get; set; }
     }
 }

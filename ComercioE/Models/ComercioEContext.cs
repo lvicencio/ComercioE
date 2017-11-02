@@ -35,5 +35,7 @@ namespace ComercioE.Models
         public System.Data.Entity.DbSet<ComercioE.Models.Producto> Productoes { get; set; }
 
         public System.Data.Entity.DbSet<ComercioE.Models.Bodega> Bodegas { get; set; }
+
+        public DbSet<Inventario> Inventarios { get; set; }
     }
 }

@@ -54,9 +54,21 @@ namespace ComercioE.Models
         [DataType(DataType.MultilineText)]
         public string Comentarios { get; set; }
 
+        //propiedad solo de lectura, que se relaciona con el inventario
+        //para calcular y mostrar el stock del producto
+        //al quitar el "set", ya quedara como solo de lectura
+        [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]
+        public double Stock {
+            get {
+                return Inventarios == null ? 0 : Inventarios.Sum( i => i.Stock);
+                 }
+                            }
+        //Inventarios == null?0:Inventarios.Sum( i => i.Stock);
+
         public virtual Compania Compania { get; set; }
         public virtual Categoria Categoria { get; set; }
         public virtual Impuesto Impuesto { get; set; }
 
+        public virtual ICollection<Inventario> Inventarios { get; set; }
     }
 }

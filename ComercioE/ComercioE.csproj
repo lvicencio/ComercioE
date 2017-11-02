@@ -232,6 +232,7 @@
     <Compile Include="Models\Compania.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Impuesto.cs" />
+    <Compile Include="Models\Inventario.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Provincia.cs" />

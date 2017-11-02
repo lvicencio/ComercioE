@@ -7,11 +7,14 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using ComercioE.Models;
+using ComercioE.Clases;
 
 namespace ComercioE.Controllers
 {
+    [Authorize(Roles = "User")]
     public class BodegasController : Controller
     {
+        
         private ComercioEContext db = new ComercioEContext();
 
         // GET: Bodegas
@@ -42,10 +45,12 @@ namespace ComercioE.Controllers
         // GET: Bodegas/Create
         public ActionResult Create()
         {
-            ViewBag.CiudadId = new SelectList(db.Ciudads, "CiudadId", "Nombre");
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
-            ViewBag.ProvinciaId = new SelectList(db.Provincias, "ProvinciaId", "Nombre");
-            return View();
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre");
+           // ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
+            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre");
+            var bodega = new Bodega { CompaniaId = user.CompaniaId };
+            return View(bodega);
         }
 
         // POST: Bodegas/Create
@@ -58,13 +63,30 @@ namespace ComercioE.Controllers
             if (ModelState.IsValid)
             {
                 db.Bodegas.Add(bodega);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                try
+                {
+                    db.SaveChanges();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception ex)
+                {
+
+                    if (ex.InnerException != null &&
+                       ex.InnerException.InnerException != null &&
+                       ex.InnerException.InnerException.Message.Contains("_Index"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Error Ingreso de la bodega");
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, ex.Message);
+                    }
+                }
             }
 
-            ViewBag.CiudadId = new SelectList(db.Ciudads, "CiudadId", "Nombre", bodega.CiudadId);
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", bodega.CompaniaId);
-            ViewBag.ProvinciaId = new SelectList(db.Provincias, "ProvinciaId", "Nombre", bodega.ProvinciaId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", bodega.CiudadId);
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", bodega.CompaniaId);
+            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", bodega.ProvinciaId);
             return View(bodega);
         }
 
@@ -80,9 +102,9 @@ namespace ComercioE.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CiudadId = new SelectList(db.Ciudads, "CiudadId", "Nombre", bodega.CiudadId);
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", bodega.CompaniaId);
-            ViewBag.ProvinciaId = new SelectList(db.Provincias, "ProvinciaId", "Nombre", bodega.ProvinciaId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", bodega.CiudadId);
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", bodega.CompaniaId);
+            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", bodega.ProvinciaId);
             return View(bodega);
         }
 
@@ -99,9 +121,9 @@ namespace ComercioE.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CiudadId = new SelectList(db.Ciudads, "CiudadId", "Nombre", bodega.CiudadId);
-            ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", bodega.CompaniaId);
-            ViewBag.ProvinciaId = new SelectList(db.Provincias, "ProvinciaId", "Nombre", bodega.ProvinciaId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", bodega.CiudadId);
+            //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", bodega.CompaniaId);
+            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", bodega.ProvinciaId);
             return View(bodega);
         }
 
