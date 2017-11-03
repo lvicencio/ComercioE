@@ -30,6 +30,7 @@ namespace ComercioE
         {
             UsersHelper.CheckRole("Admin");
             UsersHelper.CheckRole("User");
+            UsersHelper.CheckRole("Cliente");
             UsersHelper.CheckSuperUser();
         }
     }

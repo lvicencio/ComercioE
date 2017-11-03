@@ -30,5 +30,6 @@ namespace ComercioE.Models
 
         public virtual ICollection<Bodega> Bodegas { get; set; }
 
+        public virtual ICollection<Cliente> Clientes { get; set; }
     }
 }

@@ -37,5 +37,9 @@ namespace ComercioE.Models
         public System.Data.Entity.DbSet<ComercioE.Models.Bodega> Bodegas { get; set; }
 
         public DbSet<Inventario> Inventarios { get; set; }
+
+        public System.Data.Entity.DbSet<ComercioE.Models.Cliente> Clientes { get; set; }
+
+        public System.Data.Entity.DbSet<ComercioE.Models.Estado> Estadoes { get; set; }
     }
 }

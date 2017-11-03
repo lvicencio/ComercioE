@@ -36,7 +36,7 @@ namespace ComercioE.Models
         public int ProvinciaId { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Provincia")]
+        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Ciudad")]
         public int CiudadId { get; set; }
 
         [NotMapped]
@@ -51,5 +51,7 @@ namespace ComercioE.Models
         public virtual ICollection<Impuesto> Impuestos{ get; set; }
         public virtual ICollection<Producto> Productos { get; set; }
         public virtual ICollection<Bodega> Bodegas { get; set; }
+
+        public virtual ICollection<Cliente> Clientes { get; set; }
     }
 }

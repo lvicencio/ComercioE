@@ -70,5 +70,7 @@ namespace ComercioE.Models
         public virtual Impuesto Impuesto { get; set; }
 
         public virtual ICollection<Inventario> Inventarios { get; set; }
+
+        public virtual ICollection<Order> OrdeDetalles { get; set; }
     }
 }
