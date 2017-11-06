@@ -22,24 +22,30 @@ namespace ComercioE.Models
 
         public DbSet<Provincia> Provincias { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.Ciudad> Ciudads { get; set; }
+        public DbSet<Ciudad> Ciudads { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.Compania> Companias { get; set; }
+        public DbSet<Compania> Companias { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.Categoria> Categorias { get; set; }
+        public DbSet<Categoria> Categorias { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.Impuesto> Impuestoes { get; set; }
+        public DbSet<Impuesto> Impuestoes { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.Producto> Productoes { get; set; }
+        public DbSet<Producto> Productoes { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.Bodega> Bodegas { get; set; }
+        public DbSet<Bodega> Bodegas { get; set; }
 
         public DbSet<Inventario> Inventarios { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.Cliente> Clientes { get; set; }
+        public DbSet<Cliente> Clientes { get; set; }
 
-        public System.Data.Entity.DbSet<ComercioE.Models.Estado> Estadoes { get; set; }
+        public DbSet<Estado> Estadoes { get; set; }
+
+        public DbSet<Order> Orders { get; set; }
+
+        public DbSet<OrderDetalle> OrderDetalles { get; set; }
+
+        public DbSet<OrderDetalleTmp> OrderDetalleTmps { get; set; }
     }
 }

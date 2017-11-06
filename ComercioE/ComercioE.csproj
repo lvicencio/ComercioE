@@ -219,6 +219,7 @@
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ImpuestosController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
     <Compile Include="Controllers\ProvinciasController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
@@ -227,6 +228,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddProductoVista.cs" />
     <Compile Include="Models\Bodega.cs" />
     <Compile Include="Models\Categoria.cs" />
     <Compile Include="Models\Ciudad.cs" />
@@ -238,8 +240,10 @@
     <Compile Include="Models\Impuesto.cs" />
     <Compile Include="Models\Inventario.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\NuevaOrdenVista.cs" />
     <Compile Include="Models\Order.cs" />
     <Compile Include="Models\OrderDetalle.cs" />
+    <Compile Include="Models\OrderDetalleTmp.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Provincia.cs" />
     <Compile Include="Models\User.cs" />
@@ -356,6 +360,12 @@
     <Content Include="Views\Estados\Details.cshtml" />
     <Content Include="Views\Estados\Edit.cshtml" />
     <Content Include="Views\Estados\Index.cshtml" />
+    <Content Include="Views\Orders\Create.cshtml" />
+    <Content Include="Views\Orders\Delete.cshtml" />
+    <Content Include="Views\Orders\Details.cshtml" />
+    <Content Include="Views\Orders\Edit.cshtml" />
+    <Content Include="Views\Orders\Index.cshtml" />
+    <Content Include="Views\Orders\AddProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

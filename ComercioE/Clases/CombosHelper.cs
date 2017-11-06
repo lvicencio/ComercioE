@@ -31,6 +31,18 @@ namespace ComercioE.Clases
             });
             return ciudades.OrderBy(p => p.Nombre).ToList();
         }
+
+        public static List<Producto> GetProductos(int companiaId)
+        {
+            var productos = db.Productoes.Where(p => p.CompaniaId == companiaId).ToList();
+            productos.Add(new Producto
+            {
+                ProductoId = 0,
+                Descripcion = "[Seleccione Producto]",
+            });
+            return productos.OrderBy(p => p.Descripcion).ToList();
+        }
+
         public static List<Compania> GetCompanias()
         {
             var companias = db.Companias.ToList();
@@ -55,6 +67,17 @@ namespace ComercioE.Clases
                 Descripcion = "[Seleccione categoria]",
             });
             return categorias.OrderBy(p => p.Descripcion).ToList();
+        }
+
+        public static List<Cliente> GetClientes(int companiaId)
+        {
+            var clientes = db.Clientes.Where(c => c.CompaniaId == companiaId).ToList();
+            clientes.Add(new Cliente
+            {
+                ClienteId = 0,
+                Nombre = "[Seleccione Cliente]",
+            });
+            return clientes.OrderBy(c => c.Nombre).ThenBy(c=> c.Apellido).ToList();
         }
 
         public static List<Impuesto> GetImpuestos(int companiaId)
