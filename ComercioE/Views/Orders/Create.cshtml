@@ -72,7 +72,81 @@
 }
 else
 {
-    <h5>detalles</h5>
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Producto.Imagen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Impuesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Valor)
+            </th>
+          
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Detalles)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Producto.Imagen))
+                    {
+                        <img src="@Url.Content(item.Producto.Imagen)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+               
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Impuesto)
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+               
+                
+                <td>
+                    @Html.ActionLink("Quitar Producto", "DeleteProducto", new { id = item.ProductoId }, new { @class = "btn btn-danger", onclick="return confirm('¿ Seguro de Eliminar el Producto de su Orden ?')" })
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="4" align="right">
+               <strong>Total</strong>
+            </td>
+            
+            <td align="right">
+                <strong> @Html.DisplayFor(modelItem => Model.TotalCantidad)</strong>
+            </td>
+            <td align="right">
+                <strong> @Html.DisplayFor(modelItem => Model.TotalValor)</strong>
+            </td>
+
+
+            
+        </tr>
+
+    </table>
 }
 
 

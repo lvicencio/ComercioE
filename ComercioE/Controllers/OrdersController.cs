@@ -19,6 +19,22 @@ namespace ComercioE.Controllers
         //public object Date { get; private set; }
 
 
+        public  ActionResult DeleteProducto(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var orderDetalleTmp = db.OrderDetalleTmps.Where(tp => tp.UserName == User.Identity.Name && tp.ProductoId == id).FirstOrDefault();
+
+            if (orderDetalleTmp == null)
+            {
+                return HttpNotFound();
+            }
+            db.OrderDetalleTmps.Remove(orderDetalleTmp);
+            db.SaveChanges();
+            return RedirectToAction("Create");
+        }
         public ActionResult AddProducto()
         {
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
@@ -26,7 +42,45 @@ namespace ComercioE.Controllers
             return View();
         }
 
+        [HttpPost]
+        public ActionResult AddProducto(AddProductoVista vista)
+        {
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
 
+            if (ModelState.IsValid)
+            {
+                var orderDetalleTmp = db.OrderDetalleTmps.Where(tp => tp.UserName == User.Identity.Name && tp.ProductoId == vista.ProductoId).FirstOrDefault();
+
+                if (orderDetalleTmp == null)
+                {
+                    var producto = db.Productoes.Find(vista.ProductoId);
+
+                    orderDetalleTmp = new OrderDetalleTmp
+                    {
+                        Descripcion = producto.Descripcion,
+                        Precio = producto.Precio,
+                        ProductoId = producto.ProductoId,
+                        Cantidad = vista.Cantidad,
+                        Impuesto = producto.Impuesto.Valor,
+                        UserName = User.Identity.Name,
+
+                    };
+                    db.OrderDetalleTmps.Add(orderDetalleTmp);
+                }
+                else
+                {
+                    orderDetalleTmp.Cantidad += vista.Cantidad;
+                    db.Entry(orderDetalleTmp).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Create");
+            }
+
+            
+            ViewBag.ProductoId = new SelectList(CombosHelper.GetProductos(user.CompaniaId), "ProductoId", "Descripcion");
+
+            return View(vista);
+        }
 
 
         // GET: Orders

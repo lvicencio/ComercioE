@@ -25,6 +25,7 @@ namespace ComercioE.Models
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(0, double.MaxValue, ErrorMessage = "El valor debe estar {0} entre {1} y {2}")]
+        [DisplayFormat(DataFormatString = "{0:P2}", ApplyFormatInEditMode = false)]
         [Display(Name = "Impuesto")]
         public double Impuesto { get; set; }
 
