@@ -123,23 +123,30 @@ namespace ComercioE.Controllers
             //la cual se debe modificar para recibirla (en la partde arriba cambiar el Order por NuevaOrdenVista
         }
 
-        // POST: Orders/Create
-        // Para protegerse de ataques de publicación excesiva, habilite las propiedades específicas a las que desea enlazarse. Para obtener 
-        // más información vea http://go.microsoft.com/fwlink/?LinkId=317598.
+        
         [HttpPost]
-        [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "CompaniaId,OrderId,ClienteId,EstadoId,Date,Comentarios")] Order order)
+        [ValidateAntiForgeryToken] 
+        //se cambio el modelo order, por el NuevaOrdenVista, que es el que envia lavista
+        public ActionResult Create(NuevaOrdenVista vista)
         {
             if (ModelState.IsValid)
             {
-                db.Orders.Add(order);
-                db.SaveChanges();
+                //crear un modelo, para verificar una respuesta de la accion
+                var respuesta = MovimientosHelper.CrearOrder(vista, User.Identity.Name);
+                if (respuesta.Exito)
+                {
+                    return RedirectToAction("Index");
+                }
+                //db.Orders.Add(order);
+                //db.SaveChanges();
+                ModelState.AddModelError(string.Empty, respuesta.Mensage);
+
                 return RedirectToAction("Index");
             }
 
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             ViewBag.ClienteId = new SelectList(CombosHelper.GetClientes(user.CompaniaId), "ClienteId", "FullName");
-            return View(order);
+            return View(vista);
         }
 
         // GET: Orders/Edit/5

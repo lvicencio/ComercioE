@@ -207,7 +207,9 @@
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Clases\CombosHelper.cs" />
     <Compile Include="Clases\CorreoHelper.cs" />
+    <Compile Include="Clases\DBHelper.cs" />
     <Compile Include="Clases\FilesHelper.cs" />
+    <Compile Include="Clases\MovimientosHelper.cs" />
     <Compile Include="Clases\UsersHelper.cs" />
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\BodegasController.cs" />
@@ -246,6 +248,7 @@
     <Compile Include="Models\OrderDetalleTmp.cs" />
     <Compile Include="Models\Producto.cs" />
     <Compile Include="Models\Provincia.cs" />
+    <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
