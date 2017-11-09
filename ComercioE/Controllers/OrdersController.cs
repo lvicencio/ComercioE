@@ -39,7 +39,7 @@ namespace ComercioE.Controllers
         {
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             ViewBag.ProductoId = new SelectList(CombosHelper.GetProductos(user.CompaniaId), "ProductoId", "Descripcion");
-            return View();
+            return PartialView();
         }
 
         [HttpPost]
@@ -79,7 +79,7 @@ namespace ComercioE.Controllers
             
             ViewBag.ProductoId = new SelectList(CombosHelper.GetProductos(user.CompaniaId), "ProductoId", "Descripcion");
 
-            return View(vista);
+            return PartialView(vista);
         }
 
 
@@ -146,6 +146,8 @@ namespace ComercioE.Controllers
 
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             ViewBag.ClienteId = new SelectList(CombosHelper.GetClientes(user.CompaniaId), "ClienteId", "FullName");
+            vista.Detalles = db.OrderDetalleTmps.Where(o => o.UserName == User.Identity.Name).ToList();
+
             return View(vista);
         }
 

@@ -14,7 +14,7 @@ namespace ComercioE.Models
         public int ClienteId { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [DataType(DataType.Date)]
+        //[DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)]
         public DateTime Date { get; set; }
 

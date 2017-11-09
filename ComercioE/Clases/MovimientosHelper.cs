@@ -42,20 +42,22 @@ namespace ComercioE.Clases
                     db.Orders.Add(order);
                     db.SaveChanges();
 
-                    foreach (var detalle in vista.Detalles)
+                    var detalles = db.OrderDetalleTmps.Where(or => or.UserName == userName).ToList();
+
+                    foreach (var item in detalles)
                     {
                         var orderDetalle = new OrderDetalle
                         {
-                            Descripcion = detalle.Descripcion,
+                            Descripcion = item.Descripcion,
                             OrderId = order.OrderId,
-                            Precio = detalle.Precio,
-                            ProductoId = detalle.ProductoId,
-                            Cantidad = detalle.Cantidad,
-                            Impuesto = detalle.Impuesto,
+                            Precio = item.Precio,
+                            ProductoId = item.ProductoId,
+                            Cantidad = item.Cantidad,
+                            Impuesto = item.Impuesto,
                         };
 
                         db.OrderDetalles.Add(orderDetalle);
-                        db.OrderDetalleTmps.Remove(detalle);
+                        db.OrderDetalleTmps.Remove(item);
 
                     }
                     db.SaveChanges();
