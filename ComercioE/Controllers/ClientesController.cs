@@ -44,7 +44,7 @@ namespace ComercioE.Controllers
         public ActionResult Create()
         {
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre");
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(0), "CiudadId", "Nombre");
             //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre");
             var cliente = new Cliente { CompaniaId = user.CompaniaId,};
@@ -83,9 +83,9 @@ namespace ComercioE.Controllers
                 }
             }
 
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", cliente.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(cliente.ProvinciaId), "CiudadId", "Nombre", cliente.CiudadId);
           //  ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", cliente.CompaniaId);
-            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetCiudades(), "ProvinciaId", "Nombre", cliente.ProvinciaId);
+            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", cliente.ProvinciaId);
             return View(cliente);
         }
 
@@ -101,9 +101,9 @@ namespace ComercioE.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", cliente.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(cliente.ProvinciaId), "CiudadId", "Nombre", cliente.CiudadId);
             //  ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", cliente.CompaniaId);
-            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetCiudades(), "ProvinciaId", "Nombre", cliente.ProvinciaId);
+            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", cliente.ProvinciaId);
             return View(cliente);
         }
 
@@ -121,9 +121,9 @@ namespace ComercioE.Controllers
                 //validar un cambio de correo (copy/paste) desde el usercontroller
                 return RedirectToAction("Index");
             }
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", cliente.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(cliente.ProvinciaId), "CiudadId", "Nombre", cliente.CiudadId);
             //  ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre", cliente.CompaniaId);
-            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetCiudades(), "ProvinciaId", "Nombre", cliente.ProvinciaId);
+            ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", cliente.ProvinciaId);
             return View(cliente);
         }
 

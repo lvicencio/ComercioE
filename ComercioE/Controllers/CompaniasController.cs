@@ -41,7 +41,7 @@ namespace ComercioE.Controllers
         // GET: Companias/Create
         public ActionResult Create()
         {
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre");
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(0), "CiudadId", "Nombre");
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre");
             return View();
         }
@@ -96,7 +96,7 @@ namespace ComercioE.Controllers
                 }
             }
 
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", compania.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(compania.ProvinciaId), "CiudadId", "Nombre", compania.CiudadId);
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", compania.ProvinciaId);
             return View(compania);
         }
@@ -113,7 +113,7 @@ namespace ComercioE.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", compania.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(compania.ProvinciaId), "CiudadId", "Nombre", compania.CiudadId);
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", compania.ProvinciaId);
             return View(compania);
         }
@@ -162,7 +162,7 @@ namespace ComercioE.Controllers
                     }
                 }
             }
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", compania.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(compania.ProvinciaId), "CiudadId", "Nombre", compania.CiudadId);
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", compania.ProvinciaId);
             return View(compania);
         }

@@ -21,9 +21,9 @@ namespace ComercioE.Clases
             return provincias.OrderBy(p => p.Nombre).ToList();
         }
 
-        public static List<Ciudad> GetCiudades()
+        public static List<Ciudad> GetCiudades(int provinciaId)
         {
-            var ciudades = db.Ciudads.ToList();
+            var ciudades = db.Ciudads.Where( c=> c.ProvinciaId == provinciaId).ToList();
             ciudades.Add(new Ciudad
             {
                 CiudadId = 0,
@@ -32,6 +32,16 @@ namespace ComercioE.Clases
             return ciudades.OrderBy(p => p.Nombre).ToList();
         }
 
+        //public static List<Ciudad> GetCiudades()
+        //{
+        //    var ciudades = db.Ciudads.ToList();
+        //    ciudades.Add(new Ciudad
+        //    {
+        //        CiudadId = 0,
+        //        Nombre = "[Seleccione una Ciudad]",
+        //    });
+        //    return ciudades.OrderBy(p => p.Nombre).ToList();
+        //}
         public static List<Producto> GetProductos(int companiaId)
         {
             var productos = db.Productoes.Where(p => p.CompaniaId == companiaId).ToList();

@@ -41,7 +41,7 @@ namespace ComercioE.Controllers
         // GET: Users/Create
         public ActionResult Create()
         {
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre");
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(0), "CiudadId", "Nombre");
             ViewBag.CompaniaId = new SelectList(CombosHelper.GetCompanias(), "CompaniaId", "Nombre");
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre");
             return View();
@@ -98,7 +98,7 @@ namespace ComercioE.Controllers
                 }
             }
 
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", user.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(user.ProvinciaId), "CiudadId", "Nombre", user.CiudadId);
             ViewBag.CompaniaId = new SelectList(CombosHelper.GetCompanias(), "CompaniaId", "Nombre", user.CompaniaId);
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", user.ProvinciaId);
             return View(user);
@@ -116,7 +116,7 @@ namespace ComercioE.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", user.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(user.ProvinciaId), "CiudadId", "Nombre", user.CiudadId);
             ViewBag.CompaniaId = new SelectList(CombosHelper.GetCompanias(), "CompaniaId", "Nombre", user.CompaniaId);
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", user.ProvinciaId);
             return View(user);
@@ -160,7 +160,7 @@ namespace ComercioE.Controllers
                 db.SaveChanges();
                 return RedirectToAction("Index");
             }
-            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(), "CiudadId", "Nombre", user.CiudadId);
+            ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(user.ProvinciaId), "CiudadId", "Nombre", user.CiudadId);
             ViewBag.CompaniaId = new SelectList(CombosHelper.GetCompanias(), "CompaniaId", "Nombre", user.CompaniaId);
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre", user.ProvinciaId);
             return View(user);

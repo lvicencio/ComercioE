@@ -79,4 +79,30 @@
 
 @section Scripts {
     @Scripts.Render("~/bundles/jqueryval")
+<script type="text/javascript">
+        $(document).ready(function () {
+            $("#ProvinciaId").change(function () {
+                $("#CiudadId").empty();
+                $("#CiudadId").append('<option value="0">[Seleccione Ciudad]</option>');
+
+                $.ajax({
+                    type: 'POST',
+                    url: '@Url.Action("GetCiudades")',
+                    dataType: 'json',
+                    data: { provinciatId: $("#ProvinciaId").val() },
+                    success: function (data) {
+                        $.each(data, function (i, data) {
+                            $("#CiudadId").append('<option value="'
+                             + data.CiudadId + '">'
+                             + data.Nombre + '</option>');
+                        });
+                    },
+                    error: function (ex) {
+                        alert('No se pudo cargar las ciudades.' + ex);
+                    }
+                });
+                return false;
+            })
+        });
+</script>
 }
