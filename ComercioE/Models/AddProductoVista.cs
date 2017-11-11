@@ -10,7 +10,7 @@ namespace ComercioE.Models
     {
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1, double.MaxValue, ErrorMessage = "Debe Seleccionar un {0}")]
-        [Display(Name = "Producto")]
+        [Display(Name = "Producto", Prompt = "[Seleccione un Producto...]")]
         public int ProductoId { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]

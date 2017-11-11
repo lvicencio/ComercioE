@@ -38,7 +38,7 @@ namespace ComercioE.Controllers
         public ActionResult AddProducto()
         {
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            ViewBag.ProductoId = new SelectList(CombosHelper.GetProductos(user.CompaniaId), "ProductoId", "Descripcion");
+            ViewBag.ProductoId = new SelectList(CombosHelper.GetProductos(user.CompaniaId, true), "ProductoId", "Descripcion");
             return PartialView();
         }
 

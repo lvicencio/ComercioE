@@ -19,7 +19,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ProductoId, "Producto", htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.DropDownList("ProductoId", null, htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownList("ProductoId", null, ((IList<System.Web.Mvc.ModelMetadata>)ViewData.ModelMetadata.Properties)[0].Watermark, htmlAttributes: new { @class = "form-control", @required = "true" })
                 @Html.ValidationMessageFor(model => model.ProductoId, "", new { @class = "text-danger" })
             </div>
         </div>
@@ -27,7 +27,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.Cantidad, htmlAttributes: new { @class = "control-label col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.Cantidad, new { htmlAttributes = new { @class = "form-control", @required = "true" } })
                 @Html.ValidationMessageFor(model => model.Cantidad, "", new { @class = "text-danger" })
             </div>
         </div>

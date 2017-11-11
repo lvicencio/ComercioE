@@ -42,6 +42,13 @@ namespace ComercioE.Clases
         //    });
         //    return ciudades.OrderBy(p => p.Nombre).ToList();
         //}
+
+        public static List<Producto> GetProductos(int companyId, bool ola)
+        {
+            var productos = db.Productoes.Where(p => p.CompaniaId == companyId).ToList();
+            return productos.OrderBy(p => p.Descripcion).ToList();
+        }
+
         public static List<Producto> GetProductos(int companiaId)
         {
             var productos = db.Productoes.Where(p => p.CompaniaId == companiaId).ToList();
