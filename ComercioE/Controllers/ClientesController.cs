@@ -21,7 +21,23 @@ namespace ComercioE.Controllers
         {
             //busqueda de usuario logeado
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            var clientes = db.Clientes.Where(c => c.CompaniaId == user.CompaniaId).Include(c => c.Ciudad).Include(c => c.Provincia);
+            //filtrar usuario por compañia
+            var query = (from cl in db.Clientes
+                         join cc in db.CompaniaClientes on cl.ClienteId equals cc.ClienteId
+                         join co in db.Companias on cc.CompaniaId equals co.CompaniaId
+                         where co.CompaniaId == user.CompaniaId
+                         select new { cl }).ToList();
+
+
+            var clientes = new List<Cliente>();
+            foreach (var item in query)
+            {
+                clientes.Add(item.cl);
+            }
+
+
+
+           // var clientes = db.Clientes.Where(c => c.CompaniaId == user.CompaniaId).Include(c => c.Ciudad).Include(c => c.Provincia);
             return View(clientes.ToList());
         }
 
@@ -47,8 +63,8 @@ namespace ComercioE.Controllers
             ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(0), "CiudadId", "Nombre");
             //ViewBag.CompaniaId = new SelectList(db.Companias, "CompaniaId", "Nombre");
             ViewBag.ProvinciaId = new SelectList(CombosHelper.GetProvincias(), "ProvinciaId", "Nombre");
-            var cliente = new Cliente { CompaniaId = user.CompaniaId,};
-            return View(cliente);
+            //var cliente = new Cliente { CompaniaId = user.CompaniaId,};
+            return View();
         }
 
         // POST: Clientes/Create
@@ -60,27 +76,39 @@ namespace ComercioE.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Clientes.Add(cliente);
-                try
+                //se realiza una transaccion, para grabar el cliente, y su CompaniaCliente
+                using (var transaccion = db.Database.BeginTransaction())
                 {
-                    db.SaveChanges();
-                    UsersHelper.CreateUserASP(cliente.UserName, "Cliente");
-                    return RedirectToAction("Index");
-                }
-                catch (Exception ex)
-                {
+                    db.Clientes.Add(cliente);
+                    try
+                    {
+                        db.SaveChanges();
+                        UsersHelper.CreateUserASP(cliente.UserName, "Cliente");
 
-                    if (ex.InnerException != null &&
-                        ex.InnerException.InnerException != null &&
-                        ex.InnerException.InnerException.Message.Contains("_Index"))
-                    {
-                        ModelState.AddModelError(string.Empty, "Error Ingreso de Cliente");
+                        //busqueda de usuario 
+                        var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+                        var companiaUser = new CompaniaCliente
+                        {
+                            CompaniaId = user.CompaniaId,
+                            ClienteId = cliente.ClienteId,
+                        };
+
+                        db.CompaniaClientes.Add(companiaUser);
+                        db.SaveChanges();
+
+                        transaccion.Commit();
+
+                        return RedirectToAction("Index");
                     }
-                    else
+                    catch (Exception ex)
                     {
-                        ModelState.AddModelError(string.Empty, ex.Message);
-                    }
+                                              
+                            transaccion.Rollback();
+                            ModelState.AddModelError(string.Empty, ex.Message);
+                       
+                    } 
                 }
+                //fin using(transaccion)
             }
 
             ViewBag.CiudadId = new SelectList(CombosHelper.GetCiudades(cliente.ProvinciaId), "CiudadId", "Nombre", cliente.CiudadId);
@@ -148,10 +176,36 @@ namespace ComercioE.Controllers
         public ActionResult DeleteConfirmed(int id)
         {
             Cliente cliente = db.Clientes.Find(id);
-            db.Clientes.Remove(cliente);
-            db.SaveChanges();
-            UsersHelper.DeleteUser(cliente.UserName);
-            return RedirectToAction("Index");
+            //busqueda de usuario 
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            var companiaCliente = db.CompaniaClientes.Where(cc => cc.CompaniaId == user.CompaniaId && cc.ClienteId == cliente.ClienteId).FirstOrDefault();
+
+            using (var transaccion = db.Database.BeginTransaction()) 
+            {
+                try
+                {
+                    db.CompaniaClientes.Remove(companiaCliente);
+                    db.Clientes.Remove(cliente);
+                    db.SaveChanges();
+                    transaccion.Commit();
+                    return RedirectToAction("Index");
+                }
+                catch (Exception)
+                {
+
+                    transaccion.Rollback();
+                    return View(cliente);
+                }
+                                 
+                //return RedirectToAction("Index");
+            }
+        }
+
+        public JsonResult GetCiudades(int provinciatId)
+        {
+            db.Configuration.ProxyCreationEnabled = false;
+            var ciudades = db.Ciudads.Where(m => m.ProvinciaId == provinciatId);
+            return Json(ciudades);
         }
 
         protected override void Dispose(bool disposing)

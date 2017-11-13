@@ -88,7 +88,20 @@ namespace ComercioE.Clases
 
         public static List<Cliente> GetClientes(int companiaId)
         {
-            var clientes = db.Clientes.Where(c => c.CompaniaId == companiaId).ToList();
+
+            var query = (from cl in db.Clientes
+                       join cc in db.CompaniaClientes on cl.ClienteId equals cc.ClienteId
+                       join co in db.Companias on cc.CompaniaId equals co.CompaniaId
+                       where co.CompaniaId == companiaId
+                       select new { cl }).ToList();
+
+
+            var clientes = new List<Cliente>();
+            foreach (var item in query)
+            {
+                clientes.Add(item.cl);
+            }
+
             clientes.Add(new Cliente
             {
                 ClienteId = 0,

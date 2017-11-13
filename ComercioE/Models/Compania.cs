@@ -47,13 +47,14 @@ namespace ComercioE.Models
         public virtual Ciudad Ciudad { get; set; }
         public virtual Provincia Provincia { get; set; }
         public virtual ICollection<User> Usuarios { get; set; }
-        public virtual ICollection<Compania> Companias { get; set; }
+       
         public virtual ICollection<Impuesto> Impuestos{ get; set; }
         public virtual ICollection<Producto> Productos { get; set; }
         public virtual ICollection<Bodega> Bodegas { get; set; }
 
-        public virtual ICollection<Cliente> Clientes { get; set; }
-
         public virtual ICollection<Order> Ordenes { get; set; }
+
+        public virtual ICollection<CompaniaCliente> CompaniaClientes { get; set; }
+
     }
 }

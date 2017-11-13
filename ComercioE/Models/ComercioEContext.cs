@@ -47,5 +47,6 @@ namespace ComercioE.Models
         public DbSet<OrderDetalle> OrderDetalles { get; set; }
 
         public DbSet<OrderDetalleTmp> OrderDetalleTmps { get; set; }
+        public DbSet<CompaniaCliente> CompaniaClientes { get; set; }
     }
 }

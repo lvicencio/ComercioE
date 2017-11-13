@@ -27,7 +27,8 @@ namespace ComercioE.Clases
             }
         }
 
-        public static bool DeleteUser(string userName)
+        //no se borra al usuario, solo se quitan los permisos(roles)
+        public static bool DeleteUser(string userName, string roleName)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
             var userASP = userManager.FindByEmail(userName);
@@ -36,7 +37,7 @@ namespace ComercioE.Clases
                 return false;
             }
 
-           var respuesta = userManager.Delete(userASP);
+           var respuesta = userManager.RemoveFromRole(userASP.Id, roleName);
 
             return respuesta.Succeeded;
 
@@ -76,14 +77,18 @@ namespace ComercioE.Clases
         public static void CreateUserASP(string email, string roleName)
         {
             var userManager = new UserManager<ApplicationUser>(new UserStore<ApplicationUser>(userContext));
-
-            var userASP = new ApplicationUser
+            var userASP = userManager.FindByEmail(email);
+            //si el usuario es nuevo, se crea, si ya existe, se le asigna el rol
+            if (userASP == null)
             {
-                Email = email,
-                UserName = email,
-            };
-
-            userManager.Create(userASP, email);
+                userASP = new ApplicationUser
+                {
+                    Email = email,
+                    UserName = email,
+                };
+                userManager.Create(userASP, email);
+            }
+            
             userManager.AddToRole(userASP.Id, roleName);
         }
 

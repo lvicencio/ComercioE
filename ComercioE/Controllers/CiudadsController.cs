@@ -8,6 +8,7 @@ using System.Web;
 using System.Web.Mvc;
 using ComercioE.Models;
 using ComercioE.Clases;
+using PagedList;
 
 namespace ComercioE.Controllers
 {
@@ -17,10 +18,11 @@ namespace ComercioE.Controllers
         private ComercioEContext db = new ComercioEContext();
 
         // GET: Ciudads
-        public ActionResult Index()
+        public ActionResult Index(int? page = null)
         {
-            var ciudads = db.Ciudads.Include(c => c.Provincia);
-            return View(ciudads.ToList());
+            page = (page ?? 1);
+            var ciudads = db.Ciudads.Include(c => c.Provincia).OrderBy(c => c.ProvinciaId).ThenBy(c => c.Nombre);
+            return View(ciudads.ToPagedList((int)page, 3));
         }
 
         // GET: Ciudads/Details/5

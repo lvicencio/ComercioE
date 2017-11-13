@@ -191,7 +191,7 @@ namespace ComercioE.Controllers
             try
             {
                 db.SaveChanges();
-                UsersHelper.DeleteUser(user.UserName);
+                UsersHelper.DeleteUser(user.UserName, "User");
             }
             catch (Exception)
             {

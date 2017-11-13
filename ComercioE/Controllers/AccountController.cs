@@ -17,6 +17,7 @@ namespace ComercioE.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
+        private ComercioEContext db = new ComercioEContext();
 
         public AccountController()
         {
@@ -26,6 +27,24 @@ namespace ComercioE.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+
+        // metodo para mostrar el logo en el menu de arriba (header)
+        //crea una variable de session con el logo de la compañia del usuario
+        //va ser llamado  en el login
+        // para mostrarlo visualmente se debe referenciar en la vista _LoginPartial.cshtml
+        //y sera descargado (borrado la seccion) en el logout
+        public void Logo(LoginViewModel model)
+        {
+            var user = db.Users.Where(u => u.UserName == model.Email).FirstOrDefault();
+            if (user != null)
+            {
+                var company = db.Companias.Find(user.CompaniaId);
+                if (company != null)
+                {
+                    Session["Logo"] = company.Logo;
+                }
+            }
         }
 
         public ApplicationSignInManager SignInManager
@@ -79,6 +98,7 @@ namespace ComercioE.Controllers
             switch (result)
             {
                 case SignInStatus.Success:
+                    Logo(model); //llama a la funcion logo para mostrar el logo
                     return RedirectToLocal(returnUrl);
                 case SignInStatus.LockedOut:
                     return View("Lockout");
@@ -392,6 +412,7 @@ namespace ComercioE.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut(DefaultAuthenticationTypes.ApplicationCookie);
+            Session["Logo"] = null;
             return RedirectToAction("Index", "Home");
         }
 
@@ -419,7 +440,7 @@ namespace ComercioE.Controllers
                     _signInManager = null;
                 }
             }
-
+            db.Dispose();
             base.Dispose(disposing);
         }
 

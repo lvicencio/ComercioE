@@ -108,3 +108,7 @@ E:\proyectos_C#\ComercioE\ComercioE\bin\es\Microsoft.Owin.Security.MicrosoftAcco
 E:\proyectos_C#\ComercioE\ComercioE\obj\Debug\ComercioE.csprojResolveAssemblyReference.cache
 E:\proyectos_C#\ComercioE\ComercioE\obj\Debug\ComercioE.dll
 E:\proyectos_C#\ComercioE\ComercioE\obj\Debug\ComercioE.pdb
+E:\proyectos_C#\ComercioE\ComercioE\bin\PagedList.dll
+E:\proyectos_C#\ComercioE\ComercioE\bin\PagedList.Mvc.dll
+E:\proyectos_C#\ComercioE\ComercioE\bin\PagedList.xml
+E:\proyectos_C#\ComercioE\ComercioE\bin\PagedList.Mvc.xml

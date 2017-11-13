@@ -12,16 +12,16 @@ namespace ComercioE.Models
         [Key]
         public int ClienteId { get; set; }
 
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Compañia")]
-        [Display(Name = "Compania")]
-        public int CompaniaId { get; set; }
+        //[Required(ErrorMessage = "El campo {0} es requerido")]
+        //[Range(1, double.MaxValue, ErrorMessage = "Seleccione una Compañia")]
+        //[Display(Name = "Compania")]
+        //public int CompaniaId { get; set; }
 
         //UserName=Correo
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(256, ErrorMessage = "El campo {0} debe tener maximo {1} caracteres")]
         [Display(Name = "E-Mail")]
-        [Index("Cliente_UserName_Index", IsUnique = true)]
+       // [Index("Cliente_UserName_Index", IsUnique = true)]
         [DataType(DataType.EmailAddress)]
         public string UserName { get; set; }
 
@@ -61,10 +61,11 @@ namespace ComercioE.Models
 
         public virtual Ciudad Ciudad { get; set; }
 
-        public virtual Compania Compañia { get; set; }
+        //public virtual Compania Compañia { get; set; }
 
         public virtual ICollection<Order> Orders { get; set; }
 
+        public virtual ICollection<CompaniaCliente> CompaniaClientes { get; set; }
 
     }
 }
