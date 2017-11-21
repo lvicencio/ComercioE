@@ -206,9 +206,36 @@ namespace ComercioE.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            Order order = db.Orders.Find(id);
-            db.Orders.Remove(order);
-            db.SaveChanges();
+            var order = db.Orders.Find(id);
+            var detalle = db.OrderDetalles.Find(order.OrderId);
+            try
+            {
+                try
+                {
+                    db.OrderDetalles.Remove(detalle);
+                    db.SaveChanges();
+                }
+                catch (Exception)
+                {
+
+                    return RedirectToAction("Index");
+                }
+
+
+                db.Orders.Remove(order);
+                db.SaveChanges();
+
+                
+                
+
+            }
+            catch (Exception)
+            {
+
+                return RedirectToAction("Index");
+            }
+
+           
             return RedirectToAction("Index");
         }
 

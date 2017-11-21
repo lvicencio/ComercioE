@@ -9,7 +9,7 @@ namespace ComercioE.Models
     public class OrderDetalleTmp
     {
         [Key]
-        public int rderDetalleTmpId { get; set; }
+        public int OrderDetalleTmpId { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(256, ErrorMessage = "El campo {0} debe tener maximo {1} caracteres")]

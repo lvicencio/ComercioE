@@ -30,13 +30,11 @@ namespace ComercioE.Models
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         [Range(0, double.MaxValue, ErrorMessage = "El valor debe estar {0} entre {1} y {2}")]
-
         public decimal Precio { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [DisplayFormat(DataFormatString = "{0:C2}", ApplyFormatInEditMode = false)]
         [Range(0, double.MaxValue, ErrorMessage = "El valor debe estar {0} entre {1} y {2}")]
-
         public double Cantidad { get; set; }
 
         public virtual Order Order { get; set; }
