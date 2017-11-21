@@ -20,5 +20,7 @@ namespace ComercioE.Models
 
         public virtual ICollection<Order> Orders { get; set; }
 
+        public virtual ICollection<Compra> Compras { get; set; }
+
     }
 }

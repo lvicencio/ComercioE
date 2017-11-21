@@ -231,6 +231,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OrdersController.cs" />
     <Compile Include="Controllers\ProductosController.cs" />
+    <Compile Include="Controllers\ProveedoresController.cs" />
     <Compile Include="Controllers\ProvinciasController.cs" />
     <Compile Include="Controllers\UsersController.cs" />
     <Compile Include="Global.asax.cs">
@@ -246,6 +247,7 @@
     <Compile Include="Models\ComercioEContext.cs" />
     <Compile Include="Models\Compania.cs" />
     <Compile Include="Models\CompaniaCliente.cs" />
+    <Compile Include="Models\Compra.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Impuesto.cs" />
@@ -256,6 +258,7 @@
     <Compile Include="Models\OrderDetalle.cs" />
     <Compile Include="Models\OrderDetalleTmp.cs" />
     <Compile Include="Models\Producto.cs" />
+    <Compile Include="Models\Proveedor.cs" />
     <Compile Include="Models\Provincia.cs" />
     <Compile Include="Models\Respuesta.cs" />
     <Compile Include="Models\User.cs" />
@@ -387,11 +390,17 @@
     <Content Include="Views\Orders\Edit.cshtml" />
     <Content Include="Views\Orders\Index.cshtml" />
     <Content Include="Views\Orders\AddProducto.cshtml" />
+    <Content Include="Views\Proveedores\Create.cshtml" />
+    <Content Include="Views\Proveedores\Delete.cshtml" />
+    <Content Include="Views\Proveedores\Details.cshtml" />
+    <Content Include="Views\Proveedores\Edit.cshtml" />
+    <Content Include="Views\Proveedores\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="Content\Logos\" />
     <Folder Include="Content\Productos\" />
+    <Folder Include="Content\Proveedores\" />
     <Folder Include="Content\Users\" />
   </ItemGroup>
   <ItemGroup>

@@ -7,15 +7,14 @@ using System.Web;
 
 namespace ComercioE.Models
 {
-    public class User
+    public class Proveedor
     {
         [Key]
-        public int UserId { get; set; }
+        public int ProveedorId { get; set; }
         //el username sera el correo en la tabla aspuser
         [Display(Name = "Correo")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [MaxLength(256, ErrorMessage = "El campo {0} debe tener maximo {1} caracteres")]
-        [Index("User_UserName_Index", IsUnique = true)]
         [DataType(DataType.EmailAddress)]
         public string UserName { get; set; }
 
@@ -47,16 +46,11 @@ namespace ComercioE.Models
         [Range(1, double.MaxValue, ErrorMessage = "Seleccione una {0}")]
         [Display(Name = "Provincia")]
         public int ProvinciaId { get; set; }
-       
+
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1, double.MaxValue, ErrorMessage = "Seleccione una {0}")]
         [Display(Name = "Ciudad")]
         public int CiudadId { get; set; }
-
-        [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una {0}")]
-        [Display(Name = "Compañia")]
-        public int CompaniaId { get; set; }
 
         //propiedad de lectura, no lleva set, y debe retornar un valor,
         //en este caso el nombre completo
@@ -67,9 +61,9 @@ namespace ComercioE.Models
         [NotMapped]
         public HttpPostedFileBase FotoFile { get; set; }
         //relaciones
-        //una compañia pertenece a una ciudad
+        public virtual ICollection<Compra> Compras { get; set; }
+
         public virtual Ciudad Ciudad { get; set; }
         public virtual Provincia Provincia { get; set; }
-        public virtual Compania Compañia { get; set; }
     }
 }
