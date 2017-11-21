@@ -37,5 +37,9 @@ namespace ComercioE.Models
         public virtual   Proveedor Proveedor { get; set; }
 
         public virtual Estado Estado { get; set; }
+
+        public virtual Bodega Bodega { get; set; }
+
+        public virtual ICollection<CompraDetalle> CompraDetalles { get; set; }
     }
 }

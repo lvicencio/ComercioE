@@ -52,5 +52,7 @@ namespace ComercioE.Models
         public virtual Compania Compañia { get; set; }
 
         public virtual ICollection<Inventario> Inventarios { get; set; }
+
+        public virtual ICollection<Compra> Compras { get; set; }
     }
 }

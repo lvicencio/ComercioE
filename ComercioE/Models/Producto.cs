@@ -74,5 +74,9 @@ namespace ComercioE.Models
         public virtual ICollection<OrderDetalle> OrdeDetalles { get; set; }
 
         public virtual ICollection<OrderDetalleTmp> OrdeDetalleTmps { get; set; }
+
+        public virtual ICollection<CompraDetalle> CompraDetalles { get; set; }
+
+        public virtual ICollection<CompraDetalleTmps> CompraDetalleTmps { get; set; }
     }
 }

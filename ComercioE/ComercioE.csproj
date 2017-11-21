@@ -248,6 +248,8 @@
     <Compile Include="Models\Compania.cs" />
     <Compile Include="Models\CompaniaCliente.cs" />
     <Compile Include="Models\Compra.cs" />
+    <Compile Include="Models\CompraDetalle.cs" />
+    <Compile Include="Models\CompraDetalleTmps.cs" />
     <Compile Include="Models\Estado.cs" />
     <Compile Include="Models\IdentityModels.cs" />
     <Compile Include="Models\Impuesto.cs" />
