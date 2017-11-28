@@ -50,5 +50,12 @@ namespace ComercioE.Models
         public DbSet<CompaniaCliente> CompaniaClientes { get; set; }
 
         public DbSet<Proveedor> Proveedores { get; set; }
+
+        public DbSet<Compra> Compras { get; set; }
+
+        public DbSet<CompraDetalle> CompraDetalles { get; set; }
+
+        public DbSet<CompraDetalleTmps> CompraDetalleTmps { get; set; }
+
     }
 }

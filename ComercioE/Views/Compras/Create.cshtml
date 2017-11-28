@@ -1,0 +1,181 @@
+﻿@model ComercioE.Models.NuevaCompraVista
+
+@{
+    ViewBag.Title = "Create";
+}
+
+<h2>Create</h2>
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal">
+        <h4>Compra</h4>
+        <hr />
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="row">
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.ClienteId, "Cliente", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("ClienteId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.ClienteId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(model => model.BodegaId, "Bodega", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.DropDownList("BodegaId", null, htmlAttributes: new { @class = "form-control" })
+                        @Html.ValidationMessageFor(model => model.BodegaId, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Date, "Fecha", htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        <div class='input-group date' id='datepicker' style="width:280px">
+                            @Html.EditorFor(model => model.Date, new { htmlAttributes = new { @class = "form-control" } })
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                        </div>
+                        @Html.ValidationMessageFor(model => model.Date, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+
+            </div>
+
+
+            <div class="col-md-6">
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Comentarios, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Comentarios, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Comentarios, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Enviar Order" class="btn btn-primary" />
+                        @*@Html.ActionLink("Agregar Producto", "AddProducto", new { }, new { @class = "btn btn-info" })*@
+                        @Html.ActionLink("Agregar Producto", "AddProducto", "Compras", new { }, new { @class = "dialog-window btn btn-info" })
+                        @Html.ActionLink("Volver Atras", "Index", new { }, new { @class = "btn btn-success" })
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+}
+
+
+
+<h4>Detalles de la Compra de Productos</h4>
+<hr />
+
+@if (Model.Detalles.Count == 0)
+{
+    <h5>No hay detalles</h5>
+}
+else
+{
+    <table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Producto.Imagen)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Impuesto)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Precio)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Cantidad)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Detalles[0].Valor)
+            </th>
+
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model.Detalles)
+        {
+            <tr>
+                <td>
+                    @if (!string.IsNullOrEmpty(item.Producto.Imagen))
+                    {
+                        <img src="@Url.Content(item.Producto.Imagen)" alt="Image" style="width:100px;height:100px;max-width: 100%; height: auto;" />
+                    }
+
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descripcion)
+                </td>
+
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Impuesto)
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Precio)
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Cantidad)
+                </td>
+                <td align="right">
+                    @Html.DisplayFor(modelItem => item.Valor)
+                </td>
+
+
+                <td>
+                    @Html.ActionLink("Quitar Producto", "DeleteProducto", new { id = item.ProductoId }, new { @class = "btn btn-danger", onclick = "return confirm('¿ Seguro de Eliminar el Producto de su Orden ?')" })
+                </td>
+            </tr>
+        }
+
+        <tr>
+            <td colspan="4" align="right">
+                <strong>Total</strong>
+            </td>
+
+            <td align="right">
+                <strong> @Html.DisplayFor(modelItem => Model.TotalCantidad)</strong>
+            </td>
+            <td align="right">
+                <strong> @Html.DisplayFor(modelItem => Model.TotalValor)</strong>
+            </td>
+
+
+
+        </tr>
+
+    </table>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+
+    <script type="text/javascript">
+            $(function () {
+                $('#datepicker').datetimepicker({
+                    format: 'YYYY/MM/DD',
+                    locale: 'es'
+
+                });
+            });
+
+    </script>
+
+}

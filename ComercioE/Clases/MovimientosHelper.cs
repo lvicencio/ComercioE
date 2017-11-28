@@ -77,5 +77,67 @@ namespace ComercioE.Clases
 
             }
         }
+
+        public static Respuesta CrearCompra(NuevaCompraVista vistaCompra, string name)
+        {
+            using (var transaccion = db.Database.BeginTransaction())
+            {
+                try
+                {
+                    var user = db.Users.Where(u => u.UserName == name).FirstOrDefault();
+                    var compra = new Compra
+                    {
+                        CompaniaId = user.CompaniaId,
+                        
+                        Date = vistaCompra.Date,
+                       
+                        Comentarios = vistaCompra.Comentarios,
+                        BodegaId    = vistaCompra.BodegaId,
+                        EstadoId = DBHelper.GetEstado("Comprado", db),
+                    };
+
+                    db.Compras.Add(compra);
+                    db.SaveChanges();
+
+
+                    var detalles = db.CompraDetalleTmps.Where(or => or.UserName == name).ToList();
+
+                    foreach (var item in detalles)
+                    {
+                        var compraDetalle = new CompraDetalle
+                        {
+                            Descripcion = item.Descripcion,
+                            CompraId = compra.CompraId,
+                            Precio = item.Precio,
+                            ProductoId = item.ProductoId,
+                            Cantidad = item.Cantidad,
+                            Impuesto = item.Impuesto,
+                        };
+
+                        db.CompraDetalles.Add(compraDetalle);
+                        db.CompraDetalleTmps.Remove(item);
+
+                    }
+                    db.SaveChanges();
+                    //confirmar la transaccion
+                    transaccion.Commit();
+                    return new Respuesta { Exito = true, };
+                }
+                catch (Exception ex)
+                {
+
+                    transaccion.Rollback();
+                    return new Respuesta
+                    {
+                        Mensage = ex.Message,
+                        Exito = false,
+                    };
+                }
+            }
+        }
+
+
+
+
     }
 }
