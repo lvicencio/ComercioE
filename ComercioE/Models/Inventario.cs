@@ -24,6 +24,6 @@ namespace ComercioE.Models
 
         public virtual Producto Producto { get; set; }
 
-        //NOTA se debe referenciar el Inventario en en Contexto
+       
     }
 }

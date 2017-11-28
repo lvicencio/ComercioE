@@ -54,6 +54,9 @@ namespace ComercioE.Controllers
                     db.Entry(compraDetalleTmp).State = EntityState.Modified;
                 }
                 db.SaveChanges();
+                //cambio en inventario
+
+
                 return RedirectToAction("Create");
             }
 

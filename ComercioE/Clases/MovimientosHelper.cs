@@ -1,6 +1,7 @@
 ﻿using ComercioE.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity;
 using System.Linq;
 using System.Web;
 
@@ -12,7 +13,30 @@ namespace ComercioE.Clases
         private static ComercioEContext db = new ComercioEContext();
 
 
+        public static bool ActualizaInventario(CompraDetalle compraDetalle, int bodega)
+        {
 
+            //InventarioId
+            //BodegaId
+            //ProductoId
+            //Stock
+            //fin modificacion
+
+            var inventario = db.Inventarios.Where(i => i.BodegaId == bodega &&  i.ProductoId == compraDetalle.ProductoId).FirstOrDefault();
+
+
+            if (inventario != null)
+            {
+                        
+                inventario.Stock = inventario.Stock += compraDetalle.Cantidad;
+            }
+
+            db.Entry(inventario).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return true;
+
+        }
 
 
         public void Dispose()
@@ -99,6 +123,7 @@ namespace ComercioE.Clases
                     db.Compras.Add(compra);
                     db.SaveChanges();
 
+                    var bodega = compra.BodegaId;
 
                     var detalles = db.CompraDetalleTmps.Where(or => or.UserName == name).ToList();
 
@@ -117,9 +142,16 @@ namespace ComercioE.Clases
                         db.CompraDetalles.Add(compraDetalle);
                         db.CompraDetalleTmps.Remove(item);
 
+                       
+
+                        ActualizaInventario(compraDetalle, bodega);
+                       
+
                     }
                     db.SaveChanges();
                     //confirmar la transaccion
+                    
+
                     transaccion.Commit();
                     return new Respuesta { Exito = true, };
                 }
@@ -137,7 +169,7 @@ namespace ComercioE.Clases
         }
 
 
-
+       
 
     }
 }
