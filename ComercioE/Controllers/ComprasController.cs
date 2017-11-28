@@ -16,6 +16,53 @@ namespace ComercioE.Controllers
     {
         private ComercioEContext db = new ComercioEContext();
 
+
+        public ActionResult AddProducto()
+        {
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+            ViewBag.ProductoId = new SelectList(CombosHelper.GetProductos(user.CompaniaId, true), "ProductoId", "Descripcion");
+            return PartialView();
+        }
+        [HttpPost]
+        public ActionResult AddProducto(AddCompraProductoVista vista)
+        {
+            var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+
+            if (ModelState.IsValid)
+            {
+                var compraDetalleTmp = db.CompraDetalleTmps.Where(tp => tp.UserName == User.Identity.Name && tp.ProductoId == vista.ProductoId).FirstOrDefault();
+
+                if (compraDetalleTmp == null)
+                {
+                    var producto = db.Productoes.Find(vista.ProductoId);
+
+                    compraDetalleTmp = new CompraDetalleTmps
+                    {
+                        Descripcion = producto.Descripcion,
+                        Precio = vista.Precio,
+                        ProductoId = producto.ProductoId,
+                        Cantidad = vista.Cantidad,
+                        Impuesto = producto.Impuesto.Valor,
+                        UserName = User.Identity.Name,
+
+                    };
+                    db.CompraDetalleTmps.Add(compraDetalleTmp);
+                }
+                else
+                {
+                    compraDetalleTmp.Cantidad += vista.Cantidad;
+                    db.Entry(compraDetalleTmp).State = EntityState.Modified;
+                }
+                db.SaveChanges();
+                return RedirectToAction("Create");
+            }
+
+
+            ViewBag.ProductoId = new SelectList(CombosHelper.GetProductos(user.CompaniaId), "ProductoId", "Descripcion");
+
+            return PartialView(vista);
+        }
+
         // GET: Compras
         public ActionResult Index()
         {
@@ -81,7 +128,7 @@ namespace ComercioE.Controllers
             ViewBag.ClienteId = new SelectList(CombosHelper.GetClientes(user.CompaniaId), "ClienteId", "FullName");
             vistaCompra.Detalles = db.CompraDetalleTmps.Where(o => o.UserName == User.Identity.Name).ToList();
 
-            //ViewBag.BodegaId = new SelectList(db.Bodegas, "BodegaId", "Nombre", vistaCompra.BodegaId);
+            ViewBag.BodegaId = new SelectList(CombosHelper.GetBodegas(), "BodegaId", "Nombre");
             //  ViewBag.EstadoId = new SelectList(db.Estadoes, "EstadoId", "Descripcion", vistaCompra.EstadoId);
             return View(vistaCompra);
         }

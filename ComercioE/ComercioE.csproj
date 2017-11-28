@@ -240,6 +240,7 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\AddCompraProductoVista.cs" />
     <Compile Include="Models\AddProductoVista.cs" />
     <Compile Include="Models\Bodega.cs" />
     <Compile Include="Models\Categoria.cs" />
@@ -404,6 +405,7 @@
     <Content Include="Views\Compras\Details.cshtml" />
     <Content Include="Views\Compras\Edit.cshtml" />
     <Content Include="Views\Compras\Index.cshtml" />
+    <Content Include="Views\Compras\AddProducto.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

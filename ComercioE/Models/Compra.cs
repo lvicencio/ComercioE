@@ -40,6 +40,8 @@ namespace ComercioE.Models
 
         public virtual Bodega Bodega { get; set; }
 
+        public virtual Compania Compañia { get; set; }
+
         public virtual ICollection<CompraDetalle> CompraDetalles { get; set; }
     }
 }
