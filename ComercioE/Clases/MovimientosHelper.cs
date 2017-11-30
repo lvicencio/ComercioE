@@ -13,6 +13,31 @@ namespace ComercioE.Clases
         private static ComercioEContext db = new ComercioEContext();
 
 
+        public static bool RestarInventario(CompraDetalle compraDetalle, int bodega)
+        {
+
+            //InventarioId
+            //BodegaId
+            //ProductoId
+            //Stock
+            //fin modificacion
+
+            var inventario = db.Inventarios.Where(i => i.BodegaId == bodega && i.ProductoId == compraDetalle.ProductoId).FirstOrDefault();
+
+
+            if (inventario != null)
+            {
+
+                inventario.Stock = inventario.Stock += compraDetalle.Cantidad;
+            }
+
+            db.Entry(inventario).State = EntityState.Modified;
+            db.SaveChanges();
+
+            return true;
+
+        }
+
         public static bool ActualizaInventario(CompraDetalle compraDetalle, int bodega)
         {
 

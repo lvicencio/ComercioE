@@ -16,7 +16,22 @@ namespace ComercioE.Controllers
     {
         private ComercioEContext db = new ComercioEContext();
 
+        public ActionResult DeleteProducto(int? id)
+        {
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            var compraDetalleTmp = db.CompraDetalleTmps.Where(tp => tp.UserName == User.Identity.Name && tp.ProductoId == id).FirstOrDefault();
 
+            if (compraDetalleTmp == null)
+            {
+                return HttpNotFound();
+            }
+            db.CompraDetalleTmps.Remove(compraDetalleTmp);
+            db.SaveChanges();
+            return RedirectToAction("Create");
+        }
         public ActionResult AddProducto()
         {
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
