@@ -4,10 +4,10 @@
     ViewBag.Title = "Ordenes";
 }
 
-<h2>Ordenes</h2>
+<h2>Lista de Ventas</h2>
 
 <p>
-    @Html.ActionLink("Crear Nueva", "Create")
+    @Html.ActionLink("Crear Venta", "Create")
 </p>
 <table class="table">
     <tr>
@@ -41,9 +41,9 @@
             @Html.DisplayFor(modelItem => item.Comentarios)
         </td>
         <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.OrderId }) |
-            @Html.ActionLink("Details", "Details", new { id=item.OrderId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.OrderId })
+            | @Html.ActionLink("Edit", "Edit", new { id=item.OrderId }) |
+            @Html.ActionLink("Detalles", "Details", new { id=item.OrderId }) |
+           
         </td>
     </tr>
 }

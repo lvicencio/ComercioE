@@ -1,10 +1,10 @@
 ﻿@model ComercioE.Models.NuevaOrdenVista
 
 @{
-    ViewBag.Title = "Nueva Orden";
+    ViewBag.Title = "Nueva Venta";
 }
 
-<h2>Orden</h2>
+<h2>Venta</h2>
 
 
 @using (Html.BeginForm()) 
@@ -12,7 +12,7 @@
     @Html.AntiForgeryToken()
     
     <div class="form-horizontal">
-        <h4>Orden</h4>
+        
         <hr />
         @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
@@ -64,7 +64,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Enviar Order" class="btn btn-primary" />
+                        <input type="submit" value="Enviar Venta" class="btn btn-primary" />
                         @*@Html.ActionLink("Agregar Producto", "AddProducto", new { }, new { @class = "btn btn-info" })*@
                         @Html.ActionLink("Agregar Producto", "AddProducto", "Orders", new { }, new { @class = "dialog-window btn btn-info" })
                         @Html.ActionLink("Volver Atras", "Index", new { }, new { @class = "btn btn-success" })
@@ -78,7 +78,7 @@
 }
 
 
-<h4>Detalles de Orden</h4>
+<h4>Detalles de Orden de Venta</h4>
 <hr />
 
 @if (Model.Detalles.Count == 0)

@@ -13,7 +13,7 @@ namespace ComercioE.Clases
         private static ComercioEContext db = new ComercioEContext();
 
 
-        public static bool RestarInventario(CompraDetalle compraDetalle, int bodega)
+        public static bool RestarInventario(OrderDetalle orderDetalle, int bodega)
         {
 
             //InventarioId
@@ -22,13 +22,13 @@ namespace ComercioE.Clases
             //Stock
             //fin modificacion
 
-            var inventario = db.Inventarios.Where(i => i.BodegaId == bodega && i.ProductoId == compraDetalle.ProductoId).FirstOrDefault();
+            var inventario = db.Inventarios.Where(i => i.BodegaId == bodega && i.ProductoId == orderDetalle.ProductoId).FirstOrDefault();
 
 
             if (inventario != null)
             {
 
-                inventario.Stock = inventario.Stock += compraDetalle.Cantidad;
+                inventario.Stock = inventario.Stock -= orderDetalle.Cantidad;
             }
 
             db.Entry(inventario).State = EntityState.Modified;
@@ -78,6 +78,7 @@ namespace ComercioE.Clases
                 try
                 {
                     var user = db.Users.Where(u => u.UserName == userName).FirstOrDefault();
+                    var bodega = vista.BodegaId;
                     var order = new Order
                     {
                         CompaniaId = user.CompaniaId,
@@ -111,6 +112,7 @@ namespace ComercioE.Clases
                         db.OrderDetalleTmps.Remove(item);
 
                         //restar inventario
+                        RestarInventario(orderDetalle, bodega);
 
                     }
                     db.SaveChanges();
