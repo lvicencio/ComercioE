@@ -105,10 +105,124 @@ E:\proyectos_C#\ComercioE\ComercioE\bin\es\Microsoft.Owin.Security.Facebook.reso
 E:\proyectos_C#\ComercioE\ComercioE\bin\es\Microsoft.Owin.Security.Google.resources.dll
 E:\proyectos_C#\ComercioE\ComercioE\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
 E:\proyectos_C#\ComercioE\ComercioE\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
-E:\proyectos_C#\ComercioE\ComercioE\obj\Debug\ComercioE.csprojResolveAssemblyReference.cache
 E:\proyectos_C#\ComercioE\ComercioE\obj\Debug\ComercioE.dll
 E:\proyectos_C#\ComercioE\ComercioE\obj\Debug\ComercioE.pdb
 E:\proyectos_C#\ComercioE\ComercioE\bin\PagedList.dll
 E:\proyectos_C#\ComercioE\ComercioE\bin\PagedList.Mvc.dll
 E:\proyectos_C#\ComercioE\ComercioE\bin\PagedList.xml
 E:\proyectos_C#\ComercioE\ComercioE\bin\PagedList.Mvc.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\ApplicationInsights.config
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\csc.exe
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\Microsoft.Build.Tasks.CodeAnalysis.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\Microsoft.CodeAnalysis.CSharp.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\Microsoft.CodeAnalysis.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\Microsoft.CodeAnalysis.VisualBasic.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\Microsoft.CSharp.Core.targets
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\Microsoft.VisualBasic.Core.targets
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\System.Collections.Immutable.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\System.Reflection.Metadata.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\vbc.exe
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\VBCSCompiler.exe
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\roslyn\VBCSCompiler.exe.config
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\ComercioE.dll.config
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\ComercioE.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\ComercioE.pdb
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Antlr3.Runtime.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\EntityFramework.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\EntityFramework.SqlServer.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.Agent.Intercept.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.DependencyCollector.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.PerfCounterCollector.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.ServerTelemetryChannel.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.Web.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.WindowsServer.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.ApplicationInsights.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AspNet.Identity.Core.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AspNet.Identity.EntityFramework.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AspNet.Identity.Owin.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Host.SystemWeb.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.Cookies.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.Facebook.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.Google.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.MicrosoftAccount.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.OAuth.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.Twitter.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Web.Infrastructure.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Newtonsoft.Json.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Owin.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\PagedList.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\PagedList.Mvc.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Net.Http.Formatting.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Helpers.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Http.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Http.WebHost.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Mvc.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Optimization.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Razor.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.WebPages.Deployment.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.WebPages.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.WebPages.Razor.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\WebGrease.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.DependencyCollector.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.ServerTelemetryChannel.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.Web.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AI.WindowsServer.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.ApplicationInsights.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.CodeDom.Providers.DotNetCompilerPlatform.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\PagedList.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\PagedList.Mvc.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Helpers.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Mvc.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Optimization.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Razor.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.WebPages.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.WebPages.Deployment.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.WebPages.Razor.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Antlr3.Runtime.pdb
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Newtonsoft.Json.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Net.Http.Formatting.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Http.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\System.Web.Http.WebHost.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\EntityFramework.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\EntityFramework.SqlServer.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AspNet.Identity.Core.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AspNet.Identity.Owin.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.AspNet.Identity.EntityFramework.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Host.SystemWeb.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.Facebook.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.Cookies.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.OAuth.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.Google.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.Twitter.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\Microsoft.Owin.Security.MicrosoftAccount.xml
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.Helpers.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.Mvc.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.Optimization.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.Razor.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.WebPages.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.WebPages.Deployment.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.WebPages.Razor.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Net.Http.Formatting.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.Http.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\System.Web.Http.WebHost.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\EntityFramework.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\EntityFramework.SqlServer.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.AspNet.Identity.Core.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.AspNet.Identity.Owin.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.AspNet.Identity.EntityFramework.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.Owin.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.Owin.Host.SystemWeb.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.Owin.Security.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.Owin.Security.Facebook.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.Owin.Security.Google.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.Owin.Security.Twitter.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\bin\es\Microsoft.Owin.Security.MicrosoftAccount.resources.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\obj\Debug\ComercioE.csprojResolveAssemblyReference.cache
+E:\proyectos_C#\ComercioE - copia\ComercioE\obj\Debug\ComercioE.dll
+E:\proyectos_C#\ComercioE - copia\ComercioE\obj\Debug\ComercioE.pdb
+E:\proyectos_C#\ComercioE\ComercioE\obj\Debug\ComercioE.csprojResolveAssemblyReference.cache

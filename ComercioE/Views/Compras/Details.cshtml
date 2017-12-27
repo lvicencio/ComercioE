@@ -10,6 +10,15 @@
     <h4>Compra</h4>
     <hr />
     <dl class="dl-horizontal">
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Proveedor)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Proveedor.FullName)
+        </dd>
+
         <dt>
             @Html.DisplayNameFor(model => model.Bodega.Nombre)
         </dt>
@@ -26,13 +35,7 @@
             @Html.DisplayFor(model => model.Estado.Descripcion)
         </dd>
 
-        <dt>
-            @Html.DisplayNameFor(model => model.CompaniaId)
-        </dt>
 
-        <dd>
-            @Html.DisplayFor(model => model.CompaniaId)
-        </dd>
 
         <dt>
             @Html.DisplayNameFor(model => model.Date)
@@ -49,9 +52,63 @@
         <dd>
             @Html.DisplayFor(model => model.Comentarios)
         </dd>
-
     </dl>
 </div>
+
+@*<table class="table">
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Bodega.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado.Descripcion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Compañia.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Date)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Comentarios)
+            </th>
+            <th></th>
+        </tr>
+
+
+            @foreach (var item in Model.CompraDetalles)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Producto.Descripcion)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Producto.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Cantidad)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Producto.Precio)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Producto.Precio)
+                    </td>
+
+
+
+                </tr>
+            }
+
+
+    </table>*@
+
+
+
+
+
+
+
 <p>
     @Html.ActionLink("Edit", "Edit", new { id = Model.CompraId }) |
     @Html.ActionLink("Back to List", "Index")

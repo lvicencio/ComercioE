@@ -82,10 +82,12 @@ namespace ComercioE.Clases
                     {
                         CompaniaId = user.CompaniaId,
                         ClienteId = vista.ClienteId,
+                        EstadoId = DBHelper.GetEstado("Creado", db),
                         Date = vista.Date,
                         Comentarios = vista.Comentarios,
+                        BodegaId = vista.BodegaId,
                         //manda el codigo del estado, si no existe, lo creara en la db
-                        EstadoId = DBHelper.GetEstado("Creado", db),
+                        
                     };
 
                     db.Orders.Add(order);
@@ -107,6 +109,8 @@ namespace ComercioE.Clases
 
                         db.OrderDetalles.Add(orderDetalle);
                         db.OrderDetalleTmps.Remove(item);
+
+                        //restar inventario
 
                     }
                     db.SaveChanges();
@@ -136,7 +140,7 @@ namespace ComercioE.Clases
                     var user = db.Users.Where(u => u.UserName == name).FirstOrDefault();
                     var compra = new Compra
                     {
-                        CompaniaId = user.CompaniaId,
+                        ProveedorId = vistaCompra.ProveedorId,
                         
                         Date = vistaCompra.Date,
                        

@@ -111,6 +111,7 @@ namespace ComercioE.Controllers
         {
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             ViewBag.ClienteId = new SelectList(CombosHelper.GetClientes(user.CompaniaId), "ClienteId", "FullName");
+            ViewBag.BodegaId = new SelectList(CombosHelper.GetBodegas(), "BodegaId", "Nombre");
             //ViewBag.EstadoId = new SelectList(db.Estadoes, "EstadoId", "Descripcion");
 
             var vista = new NuevaOrdenVista
@@ -119,6 +120,7 @@ namespace ComercioE.Controllers
                 Detalles = db.OrderDetalleTmps.Where(o => o.UserName == User.Identity.Name).ToList(),
             };
 
+           
             return View(vista); //se manda el objeto vista, el cual debe ser recibido en la vista de create
             //la cual se debe modificar para recibirla (en la partde arriba cambiar el Order por NuevaOrdenVista
         }
@@ -146,8 +148,9 @@ namespace ComercioE.Controllers
 
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
             ViewBag.ClienteId = new SelectList(CombosHelper.GetClientes(user.CompaniaId), "ClienteId", "FullName");
+            ViewBag.BodegaId = new SelectList(CombosHelper.GetBodegas(), "BodegaId", "Nombre");
             vista.Detalles = db.OrderDetalleTmps.Where(o => o.UserName == User.Identity.Name).ToList();
-
+           
             return View(vista);
         }
 

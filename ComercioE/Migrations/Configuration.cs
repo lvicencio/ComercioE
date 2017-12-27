@@ -10,8 +10,6 @@ namespace ComercioE.Migrations
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
-            AutomaticMigrationDataLossAllowed = true;
-            ContextKey = "ComercioE.Models.ComercioEContext";
         }
 
         protected override void Seed(ComercioE.Models.ComercioEContext context)

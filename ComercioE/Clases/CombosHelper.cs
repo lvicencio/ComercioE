@@ -32,6 +32,17 @@ namespace ComercioE.Clases
             return bodegas.OrderBy(p => p.Nombre).ToList();
         }
 
+        public static List<Proveedor> GetProveedor()
+        {
+            var proveedores = db.Proveedores.ToList();
+            proveedores.Add(new Proveedor
+            {
+                ProveedorId = 0,
+                Nombre = "[Seleccione un Proveedor]",
+            });
+            return proveedores.OrderBy(c => c.Nombre).ThenBy(c => c.Apellido).ToList(); 
+        }
+
         public static List<Ciudad> GetCiudades(int provinciaId)
         {
             var ciudades = db.Ciudads.Where( c=> c.ProvinciaId == provinciaId).ToList();

@@ -21,6 +21,11 @@ namespace ComercioE.Models
         [DataType(DataType.MultilineText)]
         public string Comentarios { get; set; }
 
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Range(1, double.MaxValue, ErrorMessage = "Seleccione un Cliente")]
+        [Display(Name = "Cliente")]
+        public int BodegaId { get; set; }
+
         public List<OrderDetalleTmp> Detalles { get; set; }
 
         [DisplayFormat(DataFormatString = "{0:N2}", ApplyFormatInEditMode = false)]

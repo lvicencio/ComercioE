@@ -107,7 +107,7 @@ namespace ComercioE.Controllers
         public ActionResult Create()
         {
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            ViewBag.ClienteId = new SelectList(CombosHelper.GetClientes(user.CompaniaId), "ClienteId", "FullName");
+            ViewBag.ProveedorId = new SelectList(CombosHelper.GetProveedor(), "ProveedorId", "FullName");
 
             var vistaCompra = new NuevaCompraVista
             {
@@ -143,7 +143,7 @@ namespace ComercioE.Controllers
             }
 
             var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
-            ViewBag.ClienteId = new SelectList(CombosHelper.GetClientes(user.CompaniaId), "ClienteId", "FullName");
+            ViewBag.ProveedorId = new SelectList(CombosHelper.GetProveedor(), "ProveedorId", "FullName");
             vistaCompra.Detalles = db.CompraDetalleTmps.Where(o => o.UserName == User.Identity.Name).ToList();
 
             ViewBag.BodegaId = new SelectList(CombosHelper.GetBodegas(), "BodegaId", "Nombre");

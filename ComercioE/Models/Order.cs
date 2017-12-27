@@ -33,11 +33,18 @@ namespace ComercioE.Models
 
         [DataType(DataType.MultilineText)]
         public string Comentarios { get; set; }
+        //
+        [Required(ErrorMessage = "El campo {0} es requerido")]
+        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una {0}")]
+        [Display(Name = "Bodega")]
+        public int BodegaId { get; set; }
 
         public virtual Compania Compañia { get; set; }
         public virtual Cliente Cliente { get; set; }
 
         public virtual Estado Estado { get; set; }
+
+        public virtual Bodega Bodega { get; set; }
 
         public virtual ICollection<OrderDetalle> OrdeDetalles { get; set; }
 

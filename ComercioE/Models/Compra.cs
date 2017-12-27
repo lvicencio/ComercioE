@@ -11,10 +11,10 @@ namespace ComercioE.Models
         [Key]
         public int CompraId { get; set; }
 
-        [Display(Name = "Compañia")]
+        [Display(Name = "Proveedor")]
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Range(1, double.MaxValue, ErrorMessage = "Seleccione una Provincia")]
-        public int CompaniaId { get; set; }
+        [Range(1, double.MaxValue, ErrorMessage = "Seleccione un Proveedor")]
+        public int ProveedorId { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1, double.MaxValue, ErrorMessage = "Seleccione una {0}")]

@@ -9,9 +9,9 @@ namespace ComercioE.Models
     public class NuevaCompraVista
     {
         [Required(ErrorMessage = "El campo {0} es requerido")]
-        [Range(1, double.MaxValue, ErrorMessage = "Seleccione un Cliente")]
+        [Range(1, double.MaxValue, ErrorMessage = "Seleccione un Proveedor")]
         [Display(Name = "Cliente")]
-        public int ClienteId { get; set; }
+        public int ProveedorId { get; set; }
 
         [Required(ErrorMessage = "El campo {0} es requerido")]
         [Range(1, double.MaxValue, ErrorMessage = "Seleccione un Cliente")]
