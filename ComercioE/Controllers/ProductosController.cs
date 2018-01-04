@@ -17,14 +17,34 @@ namespace ComercioE.Controllers
         private ComercioEContext db = new ComercioEContext();
 
         // GET: Productos
-        public ActionResult Index()
+        public ActionResult Index(string Buscar)
         {
             var user = db.Users.Where( u =>u.UserName == User.Identity.Name).FirstOrDefault();
-            //var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Compania).Include(p => p.Impuesto);
-            var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Impuesto)
-                .Where(p => p.CompaniaId == user.CompaniaId);
-            return View(productoes.ToList());
+
+            var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Impuesto);
+
+            if (Buscar != null)
+            {
+                productoes = productoes.Where(p => p.CompaniaId == user.CompaniaId && p.Descripcion.Contains(Buscar));
+
+                return View(productoes.ToList());
+            }
+            else
+                //var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Compania).Include(p => p.Impuesto);
+                productoes = productoes.Where(p => p.CompaniaId == user.CompaniaId);
+
+                return View(productoes.ToList());
+            
         }
+
+        //public ActionResult Index()
+        //{
+        //    var user = db.Users.Where(u => u.UserName == User.Identity.Name).FirstOrDefault();
+        //    //var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Compania).Include(p => p.Impuesto);
+        //    var productoes = db.Productoes.Include(p => p.Categoria).Include(p => p.Impuesto)
+        //        .Where(p => p.CompaniaId == user.CompaniaId);
+        //    return View(productoes.ToList());
+        //}
 
         // GET: Productos/Details/5
         public ActionResult Details(int? id)

@@ -9,8 +9,25 @@
 <p>
     @Html.ActionLink("Crear Nuevo", "Create", new { }, new { @class = "btn btn-primary" })
 </p>
+
+<br />
+<p>
+    @using (Html.BeginForm("Index","Productos", FormMethod.Get))
+    {
+        <b>Buscar: </b>
+        @Html.TextBox("Buscar")  <input type="submit" value="Buscar Productos" class="btn btn-info" />
+    }
+
+</p>
+
+<br />
+
 <table class="table">
     <tr>
+
+        <th>
+            @Html.DisplayNameFor(model => model.Descripcion)
+        </th>
         <th>
             @Html.DisplayNameFor(model => model.Categoria.Descripcion)
         </th>
@@ -20,9 +37,7 @@
         <th>
             @Html.DisplayNameFor(model => model.Impuesto.Descripcion)
         </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Descripcion)
-        </th>
+       
         <th>
             @Html.DisplayNameFor(model => model.BarCode)
         </th>
@@ -41,6 +56,9 @@
 @foreach (var item in Model) {
     <tr>
         <td>
+            @Html.DisplayFor(modelItem => item.Descripcion)
+        </td>
+        <td>
             @Html.DisplayFor(modelItem => item.Categoria.Descripcion)
         </td>
         @*<td>
@@ -49,9 +67,7 @@
         <td>
             @Html.DisplayFor(modelItem => item.Impuesto.Descripcion)
         </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Descripcion)
-        </td>
+        
         <td>
             @Html.DisplayFor(modelItem => item.BarCode)
         </td>
